@@ -1,0 +1,522 @@
+---
+title: "Gestor de Refacciones — Almacén del taller"
+date: "2025-04-01"
+summary: "Controla el ciclo completo de refacciones: pedidas, recibidas y usadas, con trazabilidad por vehículo y valuación."
+cover: "/images/proyectos/almacen/1.png"
+stack:
+  - "Java"
+  - "JavaFX"
+  - "Maven"
+  - "Oracle SQL"
+  - "JPA/Hibernate"
+role: "Desarrollador Full Stack"
+repo: "https://github.com/Alxnhx"
+demo: ""
+---
+
+## Contexto
+
+<div className="context-grid">
+  {/* Columna izquierda: texto + terminal */}
+  <div className="context-main">
+    Antes, el almacén llevaba el control de refacciones entre libretas, notas de entrega y correos impresos. No era sencillo saber qué piezas habían sido pedidas, cuáles ya estaban en el taller o en qué vehículo se habían usado, lo que generaba compras duplicadas y pérdidas de tiempo buscando información.
+
+El objetivo: que el encargado de almacén pueda ver en una sola aplicación de escritorio el estado de cada refacción —pedida, recibida, en stock y usada— además de vincularla con la valuación o el vehículo donde se montó, para mejorar la trazabilidad y el control de inventario.
+
+    <div className="terminal-loader">
+      <div className="terminal-header">
+        <div className="terminal-controls">
+          <div className="terminal-control close"></div>
+          <div className="terminal-control minimize"></div>
+          <div className="terminal-control maximize"></div>
+        </div>
+        <div className="terminal-title">Status · GEMA Almacen</div>
+      </div>
+      <div className="terminal-content">
+        <div className="terminal-text">Cargando inventario de refacciones...</div>
+      </div>
+    </div>
+  </div>
+
+  {/* Columna derecha: snapshot del proyecto */}
+  <aside className="context-snapshot relative rounded-2xl border border-slate-800 bg-slate-950 p-4 text-slate-50 shadow-xl">
+    <div className="pointer-events-none absolute inset-0 rounded-2xl bg-gradient-to-r from-indigo-500/40 via-purple-500/30 to-pink-500/30 opacity-40 blur-md"></div>
+    <div className="relative space-y-4">
+      <header className="flex items-center justify-between gap-2">
+        <div className="flex items-center gap-2">
+          <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-gradient-to-br from-indigo-500 to-purple-500">
+            <span className="text-xs font-bold">GA</span>
+          </div>
+          <div>
+            <p className="text-xs font-semibold">Snapshot del proyecto</p>
+            <p className="text-[10px] text-slate-400">
+              Taller automotriz • Almacén de refacciones
+            </p>
+          </div>
+        </div>
+        <span className="flex items-center gap-1 rounded-full bg-emerald-500/10 px-2 py-1 text-[10px] font-medium text-emerald-400">
+          <span className="h-1.5 w-1.5 rounded-full bg-emerald-400"></span>
+          En operación
+        </span>
+      </header>
+
+      <div className="grid grid-cols-2 gap-3 text-xs">
+        <div className="rounded-lg bg-slate-900/70 p-3">
+          <p className="font-medium text-slate-300">Tiempo de registro</p>
+          <p className="mt-1 text-lg font-semibold text-emerald-400">Piezas trazadas → 100%</p>
+          <p className="mt-1 text-[10px] text-slate-400">
+            Cada refacción se vincula a una valuación o vehículo.
+          </p>
+        </div>
+        <div className="rounded-lg bg-slate-900/70 p-3">
+          <p className="font-medium text-slate-300">Stack clave</p>
+          <p className="mt-1 text-[11px] leading-snug text-slate-100">
+            Stack clave → JavaFX + Oracle SQL
+          </p>
+          <p className="mt-1 text-[10px] text-slate-400">
+           Tablas dinámicas con consultas filtrables.
+          </p>
+        </div>
+      </div>
+
+      <div className="space-y-2">
+        <p className="text-[11px] font-semibold text-slate-300">
+          Tipos de mejoras
+        </p>
+        <ul className="space-y-1 text-[11px] text-slate-300">
+          <li>• Trazabilidad de piezas pedidas, recibidas y usadas.</li>
+          <li>• Búsqueda rápida por código, descripción o estado.</li>
+          <li>• Reducción de compras duplicadas y piezas “perdidas”.</li>
+        </ul>
+      </div>
+    </div>
+  </aside>
+</div>
+
+## Vistas del panel
+
+<div className="project-carousel">
+  <div className="project-carousel-body">
+    <div className="project-carousel-slide is-active">
+      <img
+        src="/images/proyectos/almacen/1.png"
+        alt=""
+      />
+    </div>
+    <div className="project-carousel-slide">
+      <img
+        src="/images/proyectos/almacen/2.png"
+        alt="Almacen"
+      />
+    </div>
+    <div className="project-carousel-slide">
+      <img
+        src="/images/proyectos/almacen/3.png"
+        alt="Reportes y exportes de evaluaciones"
+      />
+    </div>
+    <div className="project-carousel-slide">
+      <img
+        src="/images/proyectos/almacen/4.png"
+        alt="Reportes y exportes de evaluaciones"
+      />
+    </div>
+    <div className="project-carousel-slide">
+      <img
+        src="/images/proyectos/almacen/5.png"
+        alt="Seccion de empleados y usuarios"
+      />
+    </div>
+    <div className="project-carousel-slide">
+      <img
+        src="/images/proyectos/almacen/6.png"
+        alt="Seccion de empleados y usuarios"
+      />
+    </div>
+    <div className="project-carousel-slide">
+      <img
+        src="/images/proyectos/almacen/7.png"
+        alt="Correos"
+      />
+    </div>
+    <div className="project-carousel-slide">
+      <img
+        src="/images/proyectos/almacen/8.png"
+        alt="Correos"
+      />
+    </div>
+    <div className="project-carousel-slide">
+      <img
+        src="/images/proyectos/almacen/9.png"
+        alt="Correos"
+      />
+    </div>
+    <div className="project-carousel-slide">
+      <img
+        src="/images/proyectos/almacen/10.png"
+        alt="Correos"
+      />
+    </div>
+    <div className="project-carousel-slide">
+      <img
+        src="/images/proyectos/almacen/11.png"
+        alt="Correos"
+      />
+    </div>
+  </div>
+
+  <button className="project-carousel-btn prev" type="button">&lt;</button>
+  <button className="project-carousel-btn next" type="button">&gt;</button>
+
+  <div className="project-carousel-pagination">
+    <img
+      src="/images/proyectos/almacen/1.png"
+      className="project-carousel-thumb is-active"
+      alt="Vista 1"
+    />
+    <img
+      src="/images/proyectos/almacen/2.png"
+      className="project-carousel-thumb"
+      alt="Vista 2"
+    />
+    <img
+      src="/images/proyectos/almacen/3.png"
+      className="project-carousel-thumb"
+      alt="Vista 3"
+    />
+    <img
+      src="/images/proyectos/almacen/4.png"
+      className="project-carousel-thumb"
+      alt="Vista 4"
+    />
+    <img
+      src="/images/proyectos/almacen/5.png"
+      className="project-carousel-thumb"
+      alt="Vista 5"
+    />
+    <img
+      src="/images/proyectos/almacen/6.png"
+      className="project-carousel-thumb"
+      alt="Vista 6"
+    />
+    <img
+      src="/images/proyectos/almacen/7.png"
+      className="project-carousel-thumb"
+      alt="Vista 7"
+    />
+    <img
+      src="/images/proyectos/almacen/8.png"
+      className="project-carousel-thumb"
+      alt="Vista 8"
+    />
+    <img
+      src="/images/proyectos/almacen/9.png"
+      className="project-carousel-thumb"
+      alt="Vista 9"
+    />
+    <img
+      src="/images/proyectos/almacen/10.png"
+      className="project-carousel-thumb"
+      alt="Vista 10"
+    />
+    <img
+      src="/images/proyectos/almacen/11.png"
+      className="project-carousel-thumb"
+      alt="Vista 10"
+    />
+  </div>
+</div>
+
+<script type="module">{`
+  const initCarousel = () => {
+    const carousel = document.querySelector('.project-carousel');
+    if (!carousel) return;
+
+    const slides = carousel.querySelectorAll('.project-carousel-slide');
+    const thumbs = carousel.querySelectorAll('.project-carousel-thumb');
+    const prevBtn = carousel.querySelector('.prev');
+    const nextBtn = carousel.querySelector('.next');
+    
+    let currentIndex = 0;
+
+    const showSlide = (index) => {
+      currentIndex = ((index % slides.length) + slides.length) % slides.length;
+      
+      slides.forEach((slide, i) => {
+        slide.classList.toggle('is-active', i === currentIndex);
+      });
+      
+      thumbs.forEach((thumb, i) => {
+        thumb.classList.toggle('is-active', i === currentIndex);
+      });
+    };
+
+    prevBtn?.addEventListener('click', () => showSlide(currentIndex - 1));
+    nextBtn?.addEventListener('click', () => showSlide(currentIndex + 1));
+
+    thumbs.forEach((thumb, index) => {
+      thumb.addEventListener('click', () => showSlide(index));
+    });
+  };
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initCarousel);
+  } else {
+    initCarousel();
+  }
+`}</script>
+
+---
+
+## Arquitectura y diseño técnico
+
+<div className="not-prose w-full grid gap-6 md:grid-cols-3 mt-4 arquitectura-grid">
+  <div className="case-card">
+    <div className="case-card-border"></div>
+    <div className="card_title__container">
+      <span className="case-card-title">Arquitectura</span>
+      <p className="case-card-sub">Diseño general del backend.</p>
+    </div>
+    <hr className="case-card-line" />
+    <ul className="case-card-list">
+      <li className="case-card-list-item">
+        <span className="case-card-check">
+          <svg viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
+            <path d="M12.416 3.376a.75.75 0 0 1 .208 1.04l-5 7.5a.75.75 0 0 1-1.154.114l-3-3a.75.75 0 0 1 1.06-1.06l2.353 2.353 4.493-6.74a.75.75 0 0 1 1.04-.207Z"></path>
+          </svg>
+        </span>
+        <span>Aplicación de escritorio en <strong>JavaFX.</strong></span>
+      </li>
+      <li className="case-card-list-item">
+        <span className="case-card-check">
+          <svg viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
+            <path d="M12.416 3.376a.75.75 0 0 1 .208 1.04l-5 7.5a.75.75 0 0 1-1.154.114l-3-3a.75.75 0 0 1 1.06-1.06l2.353 2.353 4.493-6.74a.75.75 0 0 1 1.04-.207Z"></path>
+          </svg>
+        </span>
+        <span>Acceso a datos con <strong>JPA/Hibernate</strong> sobre Oracle SQL.</span>
+      </li>
+      <li className="case-card-list-item">
+        <span className="case-card-check">
+          <svg viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
+            <path d="M12.416 3.376a.75.75 0 0 1 .208 1.04l-5 7.5a.75.75 0 0 1-1.154.114l-3-3a.75.75 0 0 1 1.06-1.06l2.353 2.353 4.493-6.74a.75.75 0 0 1 1.04-.207Z"></path>
+          </svg>
+        </span>
+        <span>Capas separadas: repositorios, servicios, controladores de vista..</span>
+      </li>
+    </ul>
+  </div>
+
+  <div className="case-card">
+    <div className="case-card-border"></div>
+    <div className="card_title__container">
+      <span className="case-card-title">Módulos principales</span>
+      <p className="case-card-sub">Qué resuelve el sistema.</p>
+    </div>
+    <hr className="case-card-line" />
+    <ul className="case-card-list">
+      <li className="case-card-list-item">
+        <span className="case-card-check">
+          <svg viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
+            <path d="M12.416 3.376a.75.75 0 0 1 .208 1.04l-5 7.5a.75.75 0 0 1-1.154.114l-3-3a.75.75 0 0 1 1.06-1.06l2.353 2.353 4.493-6.74a.75.75 0 0 1 1.04-.207Z"></path>
+          </svg>
+        </span>
+        <span>Alta de refacciones pedidas (órdenes a proveedores).</span>
+      </li>
+      <li className="case-card-list-item">
+        <span className="case-card-check">
+          <svg viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
+            <path d="M12.416 3.376a.75.75 0 0 1 .208 1.04l-5 7.5a.75.75 0 0 1-1.154.114l-3-3a.75.75 0 0 1 1.06-1.06l2.353 2.353 4.493-6.74a.75.75 0 0 1 1.04-.207Z"></path>
+          </svg>
+        </span>
+        <span>Registro de refacciones recibidas.</span>
+      </li>
+      <li className="case-card-list-item">
+        <span className="case-card-check">
+          <svg viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
+            <path d="M12.416 3.376a.75.75 0 0 1 .208 1.04l-5 7.5a.75.75 0 0 1-1.154.114l-3-3a.75.75 0 0 1 1.06-1.06l2.353 2.353 4.493-6.74a.75.75 0 0 1 1.04-.207Z"></path>
+          </svg>
+        </span>
+        <span>Movimiento de refacciones de “en stock” a “usadas”.</span>
+      </li>
+      <li className="case-card-list-item">
+        <span className="case-card-check">
+          <svg viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
+            <path d="M12.416 3.376a.75.75 0 0 1 .208 1.04l-5 7.5a.75.75 0 0 1-1.154.114l-3-3a.75.75 0 0 1 1.06-1.06l2.353 2.353 4.493-6.74a.75.75 0 0 1 1.04-.207Z"></path>
+          </svg>
+        </span>
+        <span>Tablas con filtros por proveedor, estado, rango de fechas.</span>
+      </li>
+    </ul>
+  </div>
+
+  <div className="case-card">
+    <div className="case-card-border"></div>
+    <div className="card_title__container">
+      <span className="case-card-title">Integraciones</span>
+      <p className="case-card-sub">Cómo se conecta con otros sistemas.</p>
+    </div>
+    <hr className="case-card-line" />
+    <ul className="case-card-list">
+      <li className="case-card-list-item">
+        <span className="case-card-check">
+          <svg viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
+            <path d="M12.416 3.376a.75.75 0 0 1 .208 1.04l-5 7.5a.75.75 0 0 1-1.154.114l-3-3a.75.75 0 0 1 1.06-1.06l2.353 2.353 4.493-6.74a.75.75 0 0 1 1.04-.207Z"></path>
+          </svg>
+        </span>
+        <span>Conexión con el módulo de valuaciones (por id de valuación / vehículo).</span>
+      </li>
+      <li className="case-card-list-item">
+        <span className="case-card-check">
+          <svg viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
+            <path d="M12.416 3.376a.75.75 0 0 1 .208 1.04l-5 7.5a.75.75 0 0 1-1.154.114l-3-3a.75.75 0 0 1 1.06-1.06l2.353 2.353 4.493-6.74a.75.75 0 0 1 1.04-.207Z"></path>
+          </svg>
+        </span>
+        <span>Exportes de inventario a Excel (stock actual, piezas usadas, etc.).</span>
+      </li>
+    </ul>
+  </div>
+</div>
+
+### Stack destacado
+
+<div className="stack-cards mt-4">
+  <div className="stack-card red">
+    <p className="tip">Maven & Java & JavaFX & JPA(Hibernate)</p>
+    <p className="second-text">APIs REST, servicios, validaciones.</p>
+  </div>
+  <div className="stack-card blue">
+    <p className="tip">Oracle SQL & Workbench & Modelado</p>
+    <p className="second-text">Tablas, relaciones, performance.</p>
+  </div>
+  <div className="stack-card green">
+    <p className="tip">Productividad</p>
+    <p className="second-text">Mayor gestion, reportes y menos papeleo.</p>
+  </div>
+</div>
+
+---
+
+## Retos
+
+<div className="case-card mt-3 case-card-left">
+  <div className="case-card-border"></div>
+  <div className="card_title__container">
+    <span className="case-card-title">Retos principales</span>
+    <p className="case-card-sub">Errores reales en el almacén del taller.</p>
+  </div>
+  <hr className="case-card-line" />
+  <ul className="case-card-list">
+    <li className="case-card-list-item">
+      <span className="case-card-check">
+        <svg viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
+          <path d="M12.416 3.376a.75.75 0 0 1 .208 1.04l-5 7.5a.75.75 0 0 1-1.154.114l-3-3a.75.75 0 0 1 1.06-1.06l2.353 2.353 4.493-6.74a.75.75 0 0 1 1.04-.207Z"></path>
+        </svg>
+      </span>
+      <span>Diseñar un flujo que el encargado de almacén pudiera usar sin capacitación extensa.</span>
+    </li>
+    <li className="case-card-list-item">
+      <span className="case-card-check">
+        <svg viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
+          <path d="M12.416 3.376a.75.75 0 0 1 .208 1.04l-5 7.5a.75.75 0 0 1-1.154.114l-3-3a.75.75 0 0 1 1.06-1.06l2.353 2.353 4.493-6.74a.75.75 0 0 1 1.04-.207Z"></path>
+        </svg>
+      </span>
+      <span>Representar el ciclo de vida de una refacción de forma clara.</span>
+    </li>
+    <li className="case-card-list-item">
+      <span className="case-card-check">
+        <svg viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
+          <path d="M12.416 3.376a.75.75 0 0 1 .208 1.04l-5 7.5a.75.75 0 0 1-1.154.114l-3-3a.75.75 0 0 1 1.06-1.06l2.353 2.353 4.493-6.74a.75.75 0 0 1 1.04-.207Z"></path>
+        </svg>
+      </span>
+      <span>Evitar registros inconsistentes (piezas usadas sin haber sido recibidas, etc.).</span>
+    </li>
+  </ul>
+</div>
+
+---
+
+## Solución
+
+<div className="case-card mt-3 case-card-right">
+  <div className="case-card-border"></div>
+  <div className="card_title__container">
+    <span className="case-card-title">Diseño de la solución</span>
+    <p className="case-card-sub">Qué se hizo técnicamente.</p>
+  </div>
+  <hr className="case-card-line" />
+  <ul className="case-card-list">
+    <li className="case-card-list-item">
+      <span className="case-card-check">
+        <svg viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
+          <path d="M12.416 3.376a.75.75 0 0 1 .208 1.04l-5 7.5a.75.75 0 0 1-1.154.114l-3-3a.75.75 0 0 1 1.06-1.06l2.353 2.353 4.493-6.74a.75.75 0 0 1 1.04-.207Z"></path>
+        </svg>
+      </span>
+      <span>Modelo relacional para refacciones, movimientos y vínculos con valuaciones.</span>
+    </li>
+    <li className="case-card-list-item">
+      <span className="case-card-check">
+        <svg viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
+          <path d="M12.416 3.376a.75.75 0 0 1 .208 1.04l-5 7.5a.75.75 0 0 1-1.154.114l-3-3a.75.75 0 0 1 1.06-1.06l2.353 2.353 4.493-6.74a.75.75 0 0 1 1.04-.207Z"></path>
+        </svg>
+      </span>
+      <span>Validaciones en cada transición de estado.</span>
+    </li>
+    <li className="case-card-list-item">
+      <span className="case-card-check">
+        <svg viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
+          <path d="M12.416 3.376a.75.75 0 0 1 .208 1.04l-5 7.5a.75.75 0 0 1-1.154.114l-3-3a.75.75 0 0 1 1.06-1.06l2.353 2.353 4.493-6.74a.75.75 0 0 1 1.04-.207Z"></path>
+        </svg>
+      </span>
+      <span>Tablas ordenables y filtrables para localizar piezas en segundos.</span>
+    </li>
+    <li className="case-card-list-item">
+      <span className="case-card-check">
+        <svg viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
+          <path d="M12.416 3.376a.75.75 0 0 1 .208 1.04l-5 7.5a.75.75 0 0 1-1.154.114l-3-3a.75.75 0 0 1 1.06-1.06l2.353 2.353 4.493-6.74a.75.75 0 0 1 1.04-.207Z"></path>
+        </svg>
+      </span>
+      <span>Vistas resumidas de “lo pedido”, “lo recibido” y “lo usado”.</span>
+    </li>
+  </ul>
+</div>
+
+---
+
+## Resultado
+
+<div className="case-card mt-3 case-card-left">
+  <div className="case-card-border"></div>
+  <div className="card_title__container">
+    <span className="case-card-title">Impacto en el taller</span>
+    <p className="case-card-sub">Qué cambió después del deploy.</p>
+  </div>
+  <hr className="case-card-line" />
+  <ul className="case-card-list">
+    <li className="case-card-list-item">
+      <span className="case-card-check">
+        <svg viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
+          <path d="M12.416 3.376a.75.75 0 0 1 .208 1.04l-5 7.5a.75.75 0 0 1-1.154.114l-3-3a.75.75 0 0 1 1.06-1.06l2.353 2.353 4.493-6.74a.75.75 0 0 1 1.04-.207Z"></path>
+        </svg>
+      </span>
+      <span>Visibilidad completa del inventario en tiempo real.</span>
+    </li>
+    <li className="case-card-list-item">
+      <span className="case-card-check">
+        <svg viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
+          <path d="M12.416 3.376a.75.75 0 0 1 .208 1.04l-5 7.5a.75.75 0 0 1-1.154.114l-3-3a.75.75 0 0 1 1.06-1.06l2.353 2.353 4.493-6.74a.75.75 0 0 1 1.04-.207Z"></path>
+        </svg>
+      </span>
+      <span>Menos errores de inventario y mejor control de costos.</span>
+    </li>
+    <li className="case-card-list-item">
+      <span className="case-card-check">
+        <svg viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
+          <path d="M12.416 3.376a.75.75 0 0 1 .208 1.04l-5 7.5a.75.75 0 0 1-1.154.114l-3-3a.75.75 0 0 1 1.06-1.06l2.353 2.353 4.493-6.74a.75.75 0 0 1 1.04-.207Z"></path>
+        </svg>
+      </span>
+      <span>Preparado para integrarse con panel administrativo y reportes globales.</span>
+    </li>
+  </ul>
+
+  <button className="case-card-button">Ver código en GitHub</button>
+</div>

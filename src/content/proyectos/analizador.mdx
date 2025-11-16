@@ -1,0 +1,430 @@
+---
+title: "Analizador de Licitaciones con IA"
+date: "2025-08-10"
+summary: "Analiza PDFs de licitaciones con la API de ChatGPT, genera un checklist automático y notifica por correo si el documento cumple los criterios definidos."
+cover: "/images/proyectos/licitaciones/1.jpeg"
+stack:
+  - "Java"
+  - "Maven"
+  - "JavaFX"
+  - "OpenAI API"
+  - "iText PDF"
+  - "SMTP"
+role: "Desarrollador BackEnd"
+repo: "https://github.com/Alxnhx"
+demo: ""
+---
+
+## Contexto
+
+<div className="context-grid">
+  {/* Columna izquierda: texto + terminal */}
+  <div className="context-main">
+    En muchos procesos de licitación, el primer filtro consiste en revisar documentos extensos para verificar si cumplen requisitos básicos: vigencia de documentos, formatos, firmas, anexos, etc. Hacerlo a mano consume horas y es propenso a errores.
+
+    El objetivo: un software de escritorio que permita cargar un PDF de licitación, analizarlo con ayuda de la API de ChatGPT y devolver un checklist automático indicando qué requisitos se cumplen, cuáles faltan y si vale la pena continuar con el proceso, además de enviar una notificación por correo cuando el documento pase los filtros.
+    <div className="terminal-loader">
+      <div className="terminal-header">
+        <div className="terminal-controls">
+          <div className="terminal-control close"></div>
+          <div className="terminal-control minimize"></div>
+          <div className="terminal-control maximize"></div>
+        </div>
+        <div className="terminal-title">Status · Analizador</div>
+      </div>
+      <div className="terminal-content">
+        <div className="terminal-text">Analizando PDF de licitación...</div>
+      </div>
+    </div>
+  </div>
+
+  {/* Columna derecha: snapshot del proyecto */}
+  <aside className="context-snapshot relative rounded-2xl border border-slate-800 bg-slate-950 p-4 text-slate-50 shadow-xl">
+    <div className="pointer-events-none absolute inset-0 rounded-2xl bg-gradient-to-r from-indigo-500/40 via-purple-500/30 to-pink-500/30 opacity-40 blur-md"></div>
+    <div className="relative space-y-4">
+      <header className="flex items-center justify-between gap-2">
+        <div className="flex items-center gap-2">
+          <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-gradient-to-br from-indigo-500 to-purple-500">
+            <span className="text-xs font-bold">GA</span>
+          </div>
+          <div>
+            <p className="text-xs font-semibold">Snapshot del proyecto</p>
+            <p className="text-[10px] text-slate-400">
+              Licitaciones • Análisis de PDF con IA
+            </p>
+          </div>
+        </div>
+        <span className="flex items-center gap-1 rounded-full bg-emerald-500/10 px-2 py-1 text-[10px] font-medium text-emerald-400">
+          <span className="h-1.5 w-1.5 rounded-full bg-emerald-400"></span>
+          Prototipo funcional
+        </span>
+      </header>
+
+      <div className="grid grid-cols-2 gap-3 text-xs">
+        <div className="rounded-lg bg-slate-900/70 p-3">
+          <p className="font-medium text-slate-300">Tiempo de registro</p>
+          <p className="mt-1 text-lg font-semibold text-emerald-400">Tiempo de revisión → Horas ➝ minutos</p>
+          <p className="mt-1 text-[10px] text-slate-400">
+            Primera pasada automatizada con checklist.
+          </p>
+        </div>
+        <div className="rounded-lg bg-slate-900/70 p-3">
+          <p className="font-medium text-slate-300">Stack clave</p>
+          <p className="mt-1 text-[11px] leading-snug text-slate-100">
+           Stack clave → OpenAI + iText PDF
+          </p>
+          <p className="mt-1 text-[10px] text-slate-400">
+           Extracción de texto y análisis semántico.
+          </p>
+        </div>
+      </div>
+
+      <div className="space-y-2">
+        <p className="text-[11px] font-semibold text-slate-300">
+          Tipos de mejoras
+        </p>
+        <ul className="space-y-1 text-[11px] text-slate-300">
+          <li>• Revisión inicial más rápida y consistente.</li>
+          <li>• Checklist descargable o copiable para el expediente.</li>
+          <li>• Notificación por correo cuando una licitación “pasa”.</li>
+        </ul>
+      </div>
+    </div>
+  </aside>
+</div>
+
+## Vistas del panel
+
+<div className="project-carousel">
+  <div className="project-carousel-body">
+    <div className="project-carousel-slide is-active">
+      <img
+        src="/images/proyectos/licitaciones/1.jpeg"
+        alt=""
+      />
+    </div>
+    <div className="project-carousel-slide">
+      <img
+        src="/images/proyectos/licitaciones/2.jpeg"
+        alt="Almacen"
+      />
+    </div>
+    <div className="project-carousel-slide">
+      <img
+        src="/images/proyectos/licitaciones/3.jpeg"
+        alt="Reportes y exportes de evaluaciones"
+      />
+    </div>
+  </div>
+
+  <button className="project-carousel-btn prev" type="button">&lt;</button>
+  <button className="project-carousel-btn next" type="button">&gt;</button>
+
+  <div className="project-carousel-pagination">
+    <img
+      src="/images/proyectos/licitaciones/1.jpeg"
+      className="project-carousel-thumb is-active"
+      alt="Vista 1"
+    />
+    <img
+      src="/images/proyectos/licitaciones/2.jpeg"
+      className="project-carousel-thumb"
+      alt="Vista 2"
+    />
+    <img
+      src="/images/proyectos/licitaciones/3.jpeg"
+      className="project-carousel-thumb"
+      alt="Vista 3"
+    />
+  </div>
+</div>
+
+<script type="module">{`
+  const initCarousel = () => {
+    const carousel = document.querySelector('.project-carousel');
+    if (!carousel) return;
+
+    const slides = carousel.querySelectorAll('.project-carousel-slide');
+    const thumbs = carousel.querySelectorAll('.project-carousel-thumb');
+    const prevBtn = carousel.querySelector('.prev');
+    const nextBtn = carousel.querySelector('.next');
+    
+    let currentIndex = 0;
+
+    const showSlide = (index) => {
+      currentIndex = ((index % slides.length) + slides.length) % slides.length;
+      
+      slides.forEach((slide, i) => {
+        slide.classList.toggle('is-active', i === currentIndex);
+      });
+      
+      thumbs.forEach((thumb, i) => {
+        thumb.classList.toggle('is-active', i === currentIndex);
+      });
+    };
+
+    prevBtn?.addEventListener('click', () => showSlide(currentIndex - 1));
+    nextBtn?.addEventListener('click', () => showSlide(currentIndex + 1));
+
+    thumbs.forEach((thumb, index) => {
+      thumb.addEventListener('click', () => showSlide(index));
+    });
+  };
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initCarousel);
+  } else {
+    initCarousel();
+  }
+`}</script>
+
+---
+
+## Arquitectura y diseño técnico
+
+<div className="not-prose w-full grid gap-6 md:grid-cols-3 mt-4 arquitectura-grid">
+  <div className="case-card">
+    <div className="case-card-border"></div>
+    <div className="card_title__container">
+      <span className="case-card-title">Arquitectura</span>
+      <p className="case-card-sub">Diseño general del backend.</p>
+    </div>
+    <hr className="case-card-line" />
+    <ul className="case-card-list">
+      <li className="case-card-list-item">
+        <span className="case-card-check">
+          <svg viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
+            <path d="M12.416 3.376a.75.75 0 0 1 .208 1.04l-5 7.5a.75.75 0 0 1-1.154.114l-3-3a.75.75 0 0 1 1.06-1.06l2.353 2.353 4.493-6.74a.75.75 0 0 1 1.04-.207Z"></path>
+          </svg>
+        </span>
+        <span>Aplicación de escritorio en <strong>JavaFX.</strong></span>
+      </li>
+      <li className="case-card-list-item">
+        <span className="case-card-check">
+          <svg viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
+            <path d="M12.416 3.376a.75.75 0 0 1 .208 1.04l-5 7.5a.75.75 0 0 1-1.154.114l-3-3a.75.75 0 0 1 1.06-1.06l2.353 2.353 4.493-6.74a.75.75 0 0 1 1.04-.207Z"></path>
+          </svg>
+        </span>
+        <span>Módulo de lectura de PDF con <strong>iText.</strong></span>
+      </li>
+      <li className="case-card-list-item">
+        <span className="case-card-check">
+          <svg viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
+            <path d="M12.416 3.376a.75.75 0 0 1 .208 1.04l-5 7.5a.75.75 0 0 1-1.154.114l-3-3a.75.75 0 0 1 1.06-1.06l2.353 2.353 4.493-6.74a.75.75 0 0 1 1.04-.207Z"></path>
+          </svg>
+        </span>
+        <span>Cliente HTTP para consumir <strong>API de ChatGPT (OpenAI).</strong></span>
+      </li>
+      <li className="case-card-list-item">
+        <span className="case-card-check">
+          <svg viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
+            <path d="M12.416 3.376a.75.75 0 0 1 .208 1.04l-5 7.5a.75.75 0 0 1-1.154.114l-3-3a.75.75 0 0 1 1.06-1.06l2.353 2.353 4.493-6.74a.75.75 0 0 1 1.04-.207Z"></path>
+          </svg>
+        </span>
+        <span>Envío de correos SMTP para notificaciones.</span>
+      </li>
+    </ul>
+  </div>
+
+  <div className="case-card">
+    <div className="case-card-border"></div>
+    <div className="card_title__container">
+      <span className="case-card-title">Módulos principales</span>
+      <p className="case-card-sub">Qué resuelve el sistema.</p>
+    </div>
+    <hr className="case-card-line" />
+    <ul className="case-card-list">
+      <li className="case-card-list-item">
+        <span className="case-card-check">
+          <svg viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
+            <path d="M12.416 3.376a.75.75 0 0 1 .208 1.04l-5 7.5a.75.75 0 0 1-1.154.114l-3-3a.75.75 0 0 1 1.06-1.06l2.353 2.353 4.493-6.74a.75.75 0 0 1 1.04-.207Z"></path>
+          </svg>
+        </span>
+        <span>Carga de archivos PDF de licitación.</span>
+      </li>
+      <li className="case-card-list-item">
+        <span className="case-card-check">
+          <svg viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
+            <path d="M12.416 3.376a.75.75 0 0 1 .208 1.04l-5 7.5a.75.75 0 0 1-1.154.114l-3-3a.75.75 0 0 1 1.06-1.06l2.353 2.353 4.493-6.74a.75.75 0 0 1 1.04-.207Z"></path>
+          </svg>
+        </span>
+        <span>Extracción y limpieza del texto relevante.</span>
+      </li>
+      <li className="case-card-list-item">
+        <span className="case-card-check">
+          <svg viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
+            <path d="M12.416 3.376a.75.75 0 0 1 .208 1.04l-5 7.5a.75.75 0 0 1-1.154.114l-3-3a.75.75 0 0 1 1.06-1.06l2.353 2.353 4.493-6.74a.75.75 0 0 1 1.04-.207Z"></path>
+          </svg>
+        </span>
+        <span>Envío del texto a la API con prompts diseñados como checklist.</span>
+      </li>
+      <li className="case-card-list-item">
+        <span className="case-card-check">
+          <svg viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
+            <path d="M12.416 3.376a.75.75 0 0 1 .208 1.04l-5 7.5a.75.75 0 0 1-1.154.114l-3-3a.75.75 0 0 1 1.06-1.06l2.353 2.353 4.493-6.74a.75.75 0 0 1 1.04-.207Z"></path>
+          </svg>
+        </span>
+        <span>Render del resultado en interfaz (checklist, observaciones).</span>
+      </li>
+    </ul>
+  </div>
+
+  <div className="case-card">
+    <div className="case-card-border"></div>
+    <div className="card_title__container">
+      <span className="case-card-title">Integraciones</span>
+      <p className="case-card-sub">Cómo se conecta con otros sistemas.</p>
+    </div>
+    <hr className="case-card-line" />
+    <ul className="case-card-list">
+      <li className="case-card-list-item">
+        <span className="case-card-check">
+          <svg viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
+            <path d="M12.416 3.376a.75.75 0 0 1 .208 1.04l-5 7.5a.75.75 0 0 1-1.154.114l-3-3a.75.75 0 0 1 1.06-1.06l2.353 2.353 4.493-6.74a.75.75 0 0 1 1.04-.207Z"></path>
+          </svg>
+        </span>
+        <span>OpenAI API para análisis de texto.</span>
+      </li>
+      <li className="case-card-list-item">
+        <span className="case-card-check">
+          <svg viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
+            <path d="M12.416 3.376a.75.75 0 0 1 .208 1.04l-5 7.5a.75.75 0 0 1-1.154.114l-3-3a.75.75 0 0 1 1.06-1.06l2.353 2.353 4.493-6.74a.75.75 0 0 1 1.04-.207Z"></path>
+          </svg>
+        </span>
+        <span>Módulo de correo (JavaMail/SMTP) para avisar cuando una licitación cumple criterios mínimos.</span>
+      </li>
+    </ul>
+  </div>
+</div>
+
+### Stack destacado
+
+<div className="stack-cards mt-4">
+  <div className="stack-card red">
+    <p className="tip">Maven & Java & JavaFX & JavaMail</p>
+    <p className="second-text">APIs REST, servicios, validaciones, envio de correos.</p>
+  </div>
+  <div className="stack-card green">
+    <p className="tip">Productividad</p>
+    <p className="second-text">Reportes de aceptacion y rechazos de licitaciones asi como analicis de PDFs</p>
+  </div>
+</div>
+
+---
+
+## Retos
+
+<div className="case-card mt-3 case-card-left">
+  <div className="case-card-border"></div>
+  <div className="card_title__container">
+    <span className="case-card-title">Retos principales</span>
+    <p className="case-card-sub">Reduccion de tiempo en aceptacion de licitaciones</p>
+  </div>
+  <hr className="case-card-line" />
+  <ul className="case-card-list">
+    <li className="case-card-list-item">
+      <span className="case-card-check">
+        <svg viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
+          <path d="M12.416 3.376a.75.75 0 0 1 .208 1.04l-5 7.5a.75.75 0 0 1-1.154.114l-3-3a.75.75 0 0 1 1.06-1.06l2.353 2.353 4.493-6.74a.75.75 0 0 1 1.04-.207Z"></path>
+        </svg>
+      </span>
+      <span>Manejar PDFs con estructuras muy distintas (tablas, anexos, etc.).</span>
+    </li>
+    <li className="case-card-list-item">
+      <span className="case-card-check">
+        <svg viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
+          <path d="M12.416 3.376a.75.75 0 0 1 .208 1.04l-5 7.5a.75.75 0 0 1-1.154.114l-3-3a.75.75 0 0 1 1.06-1.06l2.353 2.353 4.493-6.74a.75.75 0 0 1 1.04-.207Z"></path>
+        </svg>
+      </span>
+      <span>Diseñar prompts que produzcan checklists útiles y consistentes.</span>
+    </li>
+    <li className="case-card-list-item">
+      <span className="case-card-check">
+        <svg viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
+          <path d="M12.416 3.376a.75.75 0 0 1 .208 1.04l-5 7.5a.75.75 0 0 1-1.154.114l-3-3a.75.75 0 0 1 1.06-1.06l2.353 2.353 4.493-6.74a.75.75 0 0 1 1.04-.207Z"></path>
+        </svg>
+      </span>
+      <span>Evitar tiempos de espera altos en la experiencia de usuario.</span>
+    </li>
+  </ul>
+</div>
+
+---
+
+## Solución
+
+<div className="case-card mt-3 case-card-right">
+  <div className="case-card-border"></div>
+  <div className="card_title__container">
+    <span className="case-card-title">Diseño de la solución</span>
+    <p className="case-card-sub">Qué se hizo técnicamente.</p>
+  </div>
+  <hr className="case-card-line" />
+  <ul className="case-card-list">
+    <li className="case-card-list-item">
+      <span className="case-card-check">
+        <svg viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
+          <path d="M12.416 3.376a.75.75 0 0 1 .208 1.04l-5 7.5a.75.75 0 0 1-1.154.114l-3-3a.75.75 0 0 1 1.06-1.06l2.353 2.353 4.493-6.74a.75.75 0 0 1 1.04-.207Z"></path>
+        </svg>
+      </span>
+      <span>Pipeline de preprocesamiento de texto antes de enviar a la API.</span>
+    </li>
+    <li className="case-card-list-item">
+      <span className="case-card-check">
+        <svg viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
+          <path d="M12.416 3.376a.75.75 0 0 1 .208 1.04l-5 7.5a.75.75 0 0 1-1.154.114l-3-3a.75.75 0 0 1 1.06-1.06l2.353 2.353 4.493-6.74a.75.75 0 0 1 1.04-.207Z"></path>
+        </svg>
+      </span>
+      <span>Estructura de respuesta en JSON (o similar) para mapear checkboxes en la UI.</span>
+    </li>
+    <li className="case-card-list-item">
+      <span className="case-card-check">
+        <svg viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
+          <path d="M12.416 3.376a.75.75 0 0 1 .208 1.04l-5 7.5a.75.75 0 0 1-1.154.114l-3-3a.75.75 0 0 1 1.06-1.06l2.353 2.353 4.493-6.74a.75.75 0 0 1 1.04-.207Z"></path>
+        </svg>
+      </span>
+      <span>Manejo de estados de carga y reintentos en caso de error de red.</span>
+    </li>
+  </ul>
+</div>
+
+---
+
+## Resultado
+
+<div className="case-card mt-3 case-card-left">
+  <div className="case-card-border"></div>
+  <div className="card_title__container">
+    <span className="case-card-title">Impacto en el taller</span>
+    <p className="case-card-sub">Qué cambió después del deploy.</p>
+  </div>
+  <hr className="case-card-line" />
+  <ul className="case-card-list">
+    <li className="case-card-list-item">
+      <span className="case-card-check">
+        <svg viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
+          <path d="M12.416 3.376a.75.75 0 0 1 .208 1.04l-5 7.5a.75.75 0 0 1-1.154.114l-3-3a.75.75 0 0 1 1.06-1.06l2.353 2.353 4.493-6.74a.75.75 0 0 1 1.04-.207Z"></path>
+        </svg>
+      </span>
+      <span>Revisión inicial de licitaciones en minutos.</span>
+    </li>
+    <li className="case-card-list-item">
+      <span className="case-card-check">
+        <svg viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
+          <path d="M12.416 3.376a.75.75 0 0 1 .208 1.04l-5 7.5a.75.75 0 0 1-1.154.114l-3-3a.75.75 0 0 1 1.06-1.06l2.353 2.353 4.493-6.74a.75.75 0 0 1 1.04-.207Z"></path>
+        </svg>
+      </span>
+      <span>Menos riesgo de aceptar documentos que no cumplen requisitos básicos.</span>
+    </li>
+    <li className="case-card-list-item">
+      <span className="case-card-check">
+        <svg viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
+          <path d="M12.416 3.376a.75.75 0 0 1 .208 1.04l-5 7.5a.75.75 0 0 1-1.154.114l-3-3a.75.75 0 0 1 1.06-1.06l2.353 2.353 4.493-6.74a.75.75 0 0 1 1.04-.207Z"></path>
+        </svg>
+      </span>
+      <span>Base lista para agregar reglas específicas por tipo de licitación.</span>
+    </li>
+  </ul>
+
+  <button className="case-card-button">Ver código en GitHub</button>
+</div>

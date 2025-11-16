@@ -1,0 +1,4 @@
+"ID","Cliente ID","Fecha Evaluación","Estado Motor","Estado Transmisión","Estado Chasis","Estado Frenos","Vehículo Marca","Vehículo Modelo","Tipo","Color","Vehículo Año","Placa","Kilometraje","Número VIN","Ingreso Vehículo","Observaciones"
+"22","55","2025-07-04","BUENO","BUENO","BUENO","BUENO","NISSAN","SONIC","SEDAN","GRIS","2021","V12J3N1","213123","VHJGHV12HG3V","2025-07-04","Puerta trasera derecha, Puerta delantera derecha"
+"23","57","2025-07-05","BUENO","BUENO","BUENO","BUENO","NISSAN","ATTITUD","SEDAN","ROJO","2018","V3G1VG","32123","VH23VHGV31G31V","2025-07-05","GOLPE TRASERO, FASCIA TRASERA, CAJUELA, CALAVERA IZQ, CALAVERA DER"
+"24","60","2025-07-05","BUENO","POR REVISAR","BUENO","BUENO","NISSAN","ATTITUD","SEDAN","NEGRO","2012","V1V3G1V","123121","HJVJ12VJ3V1123","2025-07-05","GOLPE DELANTERO"

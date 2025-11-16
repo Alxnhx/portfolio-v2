@@ -1,0 +1,471 @@
+<footer class="site-footer mt-20">
+  <div class="footer-inner mx-auto max-w-6xl px-4 py-10">
+    <section
+      id="contacto"
+      aria-labelledby="contacto-heading"
+      class="footer-grid"
+    >
+      {/* Columna texto + “chat” */}
+      <div class="footer-contact">
+        <h2
+          id="contacto-heading"
+          class="footer-title"
+        >
+          Contáctame
+        </h2>
+        <p class="footer-text">
+          ¿Te gustaría que trabajemos juntos en un panel interno, una API o
+          un sistema a medida o algun sistema de los presentados en la web? 
+          Escríbeme y lo platicamos sin compromiso.
+        </p>
+
+        <div class="contact-widget">
+          <div class="contact-widget-inner">
+            <div class="contact-chat">
+              <div class="contact-chat-body">
+                <textarea
+                  id="contact-message"
+                  placeholder="Escribe aquí tu mensaje para iniciar la conversación en WhatsApp..."
+                ></textarea>
+              </div>
+              <div class="contact-chat-options">
+                <div class="contact-chat-buttons">
+                  <button type="button" aria-label="Adjuntar archivo">
+                    📎
+                  </button>
+                  <button type="button" aria-label="Añadir idea rápida">
+                    💡
+                  </button>
+                  <button type="button" aria-label="Emoji">
+                    🙂 
+                  </button>
+                </div>
+                <a
+                  class="contact-chat-send"
+                  href="https://wa.me/525629817096"
+                  target="_blank"
+                  rel="noreferrer"
+                >
+                  Enviar por WhatsApp
+                </a>
+              </div>
+            </div>
+          </div>
+          
+        </div>
+      </div>
+
+      {/* Columna info + redes */}
+      <div class="footer-side">
+        <div class="footer-info">
+          <p class="footer-label">Email</p>
+          <a
+            class="footer-link"
+            href="mailto:alanheoa@gmail.com"
+          >
+            alanheoa@gmail.com
+          </a>
+
+          <p class="footer-label mt-4">Ubicación</p>
+          <p class="footer-text">México · Zona centro</p>
+        </div>
+
+        <div class="footer-social-block">
+          <p class="footer-label mb-3">Redes &amp; CV</p>
+          <ul class="social-list">
+            {/* WhatsApp */}
+            <li class="social-item" data-social="whatsapp">
+              <a
+                href="https://wa.me/525629817096"
+                target="_blank"
+                rel="noreferrer"
+                aria-label="WhatsApp"
+              >
+                <span class="social-fill"></span>
+                <svg viewBox="0 0 32 32" aria-hidden="true">
+                  <path
+                    fill="currentColor"
+                    d="M16 3C9.4 3 4 8.2 4 14.7c0 2.4.7 4.6 2 6.6L4 29l7-1.8c1.9 1 4.1 1.5 6.3 1.5 6.6 0 12-5.2 12-11.7C29.3 8.2 22.7 3 16 3zm0 20.7c-1.9 0-3.7-.5-5.2-1.5l-.4-.2-3.1.8.8-3-.2-.4c-1-1.5-1.6-3.3-1.6-5.1 0-5.1 4.2-9.2 9.4-9.2 5.1 0 9.3 4.1 9.3 9.2 0 5.1-4.2 9.2-9.3 9.2zm5-6.9c-.3-.1-1.8-.9-2.1-1-.3-.1-.5-.1-.7.1-.2.3-.8 1-.9 1.1-.2.2-.3.2-.6.1-.3-.1-1.2-.4-2.3-1.3-.9-.8-1.5-1.8-1.7-2.1-.2-.3 0-.5.1-.6.1-.1.3-.3.4-.4.1-.1.2-.3.3-.4.1-.1.1-.3.2-.4.1-.1.1-.2 0-.4-.1-.1-.7-1.7-1-2.3-.3-.6-.5-.5-.7-.5h-.6c-.2 0-.4.1-.5.3-.2.3-.7.7-.7 1.8 0 1.1.8 2.2.9 2.4.1.2 1.5 2.7 3.7 3.8 2.2 1.1 2.2.7 2.6.7.4 0 1.3-.5 1.5-1 .2-.5.2-.9.1-1-.1-.2-.3-.2-.6-.3z"
+                  />
+                </svg>
+              </a>
+              <div class="social-tooltip">WhatsApp</div>
+            </li>
+
+            {/* GitHub */}
+            <li class="social-item" data-social="github">
+              <a
+                href="https://github.com/Alxnhx"
+                target="_blank"
+                rel="noreferrer"
+                aria-label="GitHub"
+              >
+                <span class="social-fill"></span>
+                <svg viewBox="0 0 24 24" aria-hidden="true">
+                  <path
+                    fill="currentColor"
+                    d="M12 2C6.48 2 2 6.58 2 12.26c0 4.52 2.87 8.35 6.84 9.7.5.1.68-.22.68-.48 0-.24-.01-.87-.01-1.7-2.78.62-3.37-1.37-3.37-1.37-.45-1.18-1.11-1.5-1.11-1.5-.91-.64.07-.63.07-.63 1 .07 1.53 1.06 1.53 1.06.9 1.57 2.36 1.12 2.94.86.09-.67.35-1.12.63-1.38-2.22-.26-4.56-1.15-4.56-5.11 0-1.13.39-2.06 1.03-2.78-.1-.26-.45-1.33.1-2.77 0 0 .84-.27 2.75 1.06A9.18 9.18 0 0 1 12 6.1c.85 0 1.72.12 2.53.36 1.9-1.33 2.74-1.06 2.74-1.06.55 1.44.21 2.51.1 2.77.64.72 1.03 1.65 1.03 2.78 0 3.97-2.34 4.84-4.57 5.09.36.32.68.96.68 1.94 0 1.4-.01 2.52-.01 2.86 0 .27.18.59.69.48A10.03 10.03 0 0 0 22 12.26C22 6.58 17.52 2 12 2Z"
+                  />
+                </svg>
+              </a>
+              <div class="social-tooltip">GitHub</div>
+            </li>
+
+            {/* LinkedIn */}
+            <li class="social-item" data-social="linkedin">
+              <a
+                href="https://www.linkedin.com/in/alanvalentinho/"
+                target="_blank"
+                rel="noreferrer"
+                aria-label="LinkedIn"
+              >
+                <span class="social-fill"></span>
+                <svg viewBox="0 0 24 24" aria-hidden="true">
+                  <path
+                    fill="currentColor"
+                    d="M6.5 6.5A2.5 2.5 0 1 1 4 4a2.5 2.5 0 0 1 2.5 2.5ZM3 9h7v12H3zm8.5 0h6.7c.4 0 .8 0 1.3.1.4.1.8.3 1.2.5.4.3.7.6 1 1 .2.4.4.9.5 1.3.1.5.1.9.1 1.4V21H16v-6.3c0-.4 0-.8-.1-1.2a1.8 1.8 0 0 0-.5-1c-.3-.3-.8-.4-1.3-.4-.7 0-1.2.2-1.6.7-.4.4-.6 1-.7 1.5v6.7H11.5z"
+                  />
+                </svg>
+              </a>
+              <div class="social-tooltip">LinkedIn</div>
+            </li>
+
+            {/* Gmail */}
+            <li class="social-item" data-social="gmail">
+              <a
+                href="mailto:alanva091104@gmail.com"
+                aria-label="Gmail"
+              >
+                <span class="social-fill"></span>
+                <svg viewBox="0 0 24 24" aria-hidden="true">
+                  <path
+                    fill="currentColor"
+                    d="M20 4H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h3v-8.5L12 14l5-2.5V20h3a2 2 0 0 0 2-2V6a2 2 0 0 0-2-2Zm-1 4.7L12 13 5 8.7V7l7 4 7-4Z"
+                  />
+                </svg>
+              </a>
+              <div class="social-tooltip">Gmail</div>
+            </li>
+
+            {/* CV */}
+            <li class="social-item" data-social="cv">
+              <a
+                href="/muestras/Alan_Valentin_Hernandez_Olvera_CV.pdf"
+                target="_blank"
+                rel="noreferrer"
+                aria-label="Descargar CV"
+              >
+                <span class="social-fill"></span>
+                <svg viewBox="0 0 24 24" aria-hidden="true">
+                  <path
+                    fill="currentColor"
+                    d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8Zm1 1.5L19.5 8H15ZM8 11h8v2H8Zm0 4h5v2H8Z"
+                  />
+                </svg>
+              </a>
+              <div class="social-tooltip">CV</div>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <div class="footer-copy">
+      <p>
+        © {new Date().getFullYear()} Alan Hernández. Todos los derechos
+        reservados.
+      </p>
+    </div>
+  </div>
+</footer>
+
+<style>
+.site-footer {
+  border-top: 1px solid rgba(15, 23, 42, 0.9);
+  background: radial-gradient(circle at top, rgba(56, 189, 248, 0.08), transparent 55%),
+    #020617;
+  color: #cbd5f5;
+}
+
+.footer-grid {
+  display: grid;
+  gap: 2.5rem;
+}
+
+@media (min-width: 1024px) {
+  .footer-grid {
+    grid-template-columns: minmax(0, 1.4fr) minmax(0, 1.1fr);
+    align-items: flex-start;
+  }
+}
+
+.footer-title {
+  font-family: 'Sora', system-ui, -apple-system, BlinkMacSystemFont, 'Inter',
+    sans-serif;
+  font-size: 1.25rem;
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  margin-bottom: 0.6rem;
+}
+
+.footer-text {
+  font-size: 0.9rem;
+  line-height: 1.7;
+  color: #9ca3af;
+}
+
+.footer-label {
+  font-size: 0.75rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: #93c5fd;
+}
+
+.footer-link {
+  font-size: 0.9rem;
+  color: #e5e7eb;
+  text-decoration: none;
+}
+
+.footer-link:hover {
+  color: #22d3ee;
+}
+
+/* ---------- CONTACT WIDGET ---------- */
+
+.contact-widget {
+  margin-top: 1.5rem;
+}
+
+.contact-widget-inner {
+  position: relative;
+  border-radius: 1.1rem;
+  padding: 2px;
+  background: linear-gradient(130deg, #a855f7, #22d3ee, #22c55e);
+  box-shadow: 0 16px 40px rgba(15, 23, 42, 0.9);
+}
+
+.contact-chat {
+  background: radial-gradient(circle at top, rgba(56, 189, 248, 0.1), transparent 55%),
+    rgba(15, 23, 42, 0.96);
+  border-radius: 1rem;
+  padding: 0.85rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.55rem;
+}
+
+.contact-chat-body textarea {
+  width: 100%;
+  height: 70px;
+  border-radius: 0.9rem;
+  border: 1px solid rgba(148, 163, 184, 0.6);
+  background: rgba(15, 23, 42, 0.95);
+  color: #e5e7eb;
+  font-size: 0.82rem;
+  padding: 0.6rem 0.75rem;
+  resize: none;
+  outline: none;
+}
+
+.contact-chat-body textarea::placeholder {
+  color: #64748b;
+}
+
+.contact-chat-body textarea::-webkit-scrollbar {
+  width: 6px;
+}
+
+.contact-chat-body textarea::-webkit-scrollbar-thumb {
+  background: #4b5563;
+  border-radius: 999px;
+}
+
+.contact-chat-options {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.contact-chat-buttons {
+  display: flex;
+  gap: 0.4rem;
+}
+
+.contact-chat-buttons button {
+  border: none;
+  outline: none;
+  background: transparent;
+  color: #64748b;
+  cursor: pointer;
+  font-size: 0.9rem;
+  transition: transform 0.15s ease, color 0.15s ease;
+}
+
+.contact-chat-buttons button:hover {
+  transform: translateY(-2px);
+  color: #e5e7eb;
+}
+
+.contact-chat-send {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.4rem 0.95rem;
+  border-radius: 999px;
+  font-size: 0.78rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  text-decoration: none;
+  background-image: linear-gradient(120deg, #22c55e, #22d3ee);
+  color: #020617;
+  box-shadow: 0 8px 25px rgba(34, 197, 94, 0.5);
+}
+
+.contact-chat-send:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 14px 35px rgba(34, 197, 94, 0.7);
+}
+
+.contact-widget-note {
+  margin-top: 0.5rem;
+  font-size: 0.75rem;
+  color: #64748b;
+}
+
+/* ---------- SOCIAL ICONS ---------- */
+
+.footer-side {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.footer-social-block {
+  margin-top: 0.5rem;
+}
+
+.social-list {
+  list-style: none;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.85rem;
+  padding: 0;
+  margin: 0;
+}
+
+.social-item {
+  position: relative;
+}
+
+.social-tooltip {
+  position: absolute;
+  top: -32px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: rgba(15, 23, 42, 0.95);
+  color: #f9fafb;
+  padding: 4px 10px;
+  border-radius: 999px;
+  font-size: 0.7rem;
+  opacity: 0;
+  visibility: hidden;
+  white-space: nowrap;
+  transition: all 0.2s ease;
+}
+
+.social-item:hover .social-tooltip {
+  opacity: 1;
+  visibility: visible;
+  top: -40px;
+}
+
+.social-item a {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 46px;
+  height: 46px;
+  border-radius: 0.9rem;
+  color: #f9fafb;
+  text-decoration: none;
+  overflow: hidden;
+  background: linear-gradient(
+    135deg,
+    rgba(255, 255, 255, 0.16),
+    rgba(148, 163, 184, 0.18)
+  );
+  backdrop-filter: blur(14px) saturate(180%);
+  -webkit-backdrop-filter: blur(14px) saturate(180%);
+  box-shadow:
+    inset 0 1px 2px rgba(255, 255, 255, 0.45),
+    inset 0 -2px 6px rgba(0, 0, 0, 0.18),
+    0 6px 16px rgba(0, 0, 0, 0.24);
+  transition: box-shadow 0.25s ease, transform 0.25s ease;
+}
+
+.social-item a svg {
+  position: relative;
+  z-index: 1;
+  width: 24px;
+  height: 24px;
+}
+
+.social-fill {
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  transform: translateY(100%);
+  transition: transform 0.3s ease;
+}
+
+.social-item a:hover .social-fill {
+  transform: translateY(0%);
+}
+
+.social-item a:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 12px 30px rgba(15, 23, 42, 0.75);
+}
+
+/* Colores por red */
+
+.social-item[data-social='whatsapp'] .social-fill {
+  background: linear-gradient(135deg, #0f3d1f, #22c55e, #4ade80);
+}
+
+.social-item[data-social='github'] .social-fill {
+  background: linear-gradient(135deg, #020617, #111827, #4b5563);
+}
+
+.social-item[data-social='linkedin'] .social-fill {
+  background: linear-gradient(135deg, #0b3b71, #2563eb, #38bdf8);
+}
+
+.social-item[data-social='gmail'] .social-fill {
+  background: linear-gradient(135deg, #7f1d1d, #dc2626, #fb923c);
+}
+
+.social-item[data-social='cv'] .social-fill {
+  background: linear-gradient(135deg, #0f766e, #22c55e, #2dd4bf);
+}
+
+/* ---------- COPY ---------- */
+
+.footer-copy {
+  border-top: 1px solid rgba(30, 64, 175, 0.35);
+  margin-top: 2.5rem;
+  padding-top: 0.9rem;
+  font-size: 0.8rem;
+  color: #64748b;
+  text-align: center;
+}
+
+/* modo claro footer */
+:global(body:not(.dark)) .site-footer {
+  background: #020617;
+}
+</style>

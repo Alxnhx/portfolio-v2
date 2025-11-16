@@ -1,0 +1,37 @@
+---
+import BaseLayout from './BaseLayout.astro';
+const { frontmatter } = Astro.props;
+const { title, summary, cover, stack = [], repo, demo } = frontmatter;
+---
+
+<BaseLayout title={title} description={summary}>
+  <main class="mx-auto max-w-5xl px-4">
+    <section class="mt-8">
+      <h1 class="font-display text-3xl md:text-4xl">{title}</h1>
+      <p class="mt-2 text-slate-600 dark:text-slate-400">{summary}</p>
+
+      {cover && (
+        <figure class="mt-6 rounded-xl overflow-hidden border border-slate-200 dark:border-slate-800">
+          <img src={cover} alt={title} loading="lazy" class="w-full" />
+        </figure>
+      )}
+
+      {stack.length > 0 && (
+        <ul class="mt-4 flex flex-wrap gap-2">
+          {stack.map((t: string) => (
+            <li class="text-xs px-2 py-1 rounded border border-slate-200 dark:border-slate-700">{t}</li>
+          ))}
+        </ul>
+      )}
+
+      <div class="mt-4 flex gap-3">
+        {repo && <a class="text-sm underline hover:text-brand" href={repo} target="_blank">Código</a>}
+        {demo && <a class="text-sm underline hover:text-brand" href={demo} target="_blank">Demo</a>}
+      </div>
+    </section>
+
+    <article class="prose prose-slate dark:prose-invert mt-8 max-w-none">
+      <slot />
+    </article>
+  </main>
+</BaseLayout>

@@ -1,0 +1,31 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import ProjectCard from '../components/ProjectCard.astro';
+import { getCollection, type CollectionEntry } from 'astro:content';
+
+const proyectos: CollectionEntry<'proyectos'>[] = await getCollection('proyectos');
+const ordenados = [...proyectos].sort(
+  (a, b) => new Date(b.data.date).getTime() - new Date(a.data.date).getTime()
+);
+---
+
+<BaseLayout title="Proyectos — Alan Hernández">
+  <Header />
+  <main class="mx-auto max-w-6xl px-4 mt-10">
+    <h1 class="font-display text-3xl mb-6">Proyectos</h1>
+    <div class="grid md:grid-cols-3 gap-6">
+      {ordenados.map((p) => (
+        <ProjectCard
+          title={p.data.title}
+          summary={p.data.summary}
+          href={`/proyectos/${p.slug}/`}
+          image={p.data.cover}
+          stack={p.data.stack}
+        />
+      ))}
+    </div>
+  </main>
+  <Footer />
+</BaseLayout>

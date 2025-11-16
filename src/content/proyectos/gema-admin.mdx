@@ -1,0 +1,624 @@
+---
+title: "GEMA Admin — Panel de control para taller automotriz"
+date: "2025-04-01"
+summary: "Administra inventario de refacciones en almacen, valuaciones aseguradoras y particulares asi como generacion de reportes (.xlsx) y ordenes (.pdf)."
+cover: "/images/proyectos/Administrador/home.jpeg"
+stack: ["Java", "JavaFX", "GSON", "JSON", "HTTP", "MySQL", "AWS", "JavaMail", "Excel export", "SMTP"]
+role: "Backend principal • Full-stack Jr."
+repo: "https://github.com/Alxnhx"
+demo: ""
+---
+
+## Contexto
+
+<div className="context-grid">
+  {/* Columna izquierda: texto + terminal */}
+  <div className="context-main">
+    Un software personalizado para centralizar el control de administrador de un taller y sus operaciones como 
+    inventario de refacciones y valuaciones que estaban dispersos en distintos portales propios de cada aseguradora
+    asi como tambien en ordenes de admision propias del taller que se llenaban a mano por el personal al momento que 
+    llegaba la unidad y se generaba su archivo propio que daban incapuie a generar transpapelacion, 
+    formularios en papel asi como confusion de ubicaciones de refacciones en el almacen.
+    El objetivo: Que el jefe, encargados y administradores del taller puedan ver **en un solo panel** qué autos entran, 
+    qué refacciones se usan y qué valuaciones se han realizado y en que tiempo para mejorar la eficiencia en satisfaccion
+    del cliente llegados por aseguradoras y particulares en un solo software para evitar conflictos de perdida de datos
+    o atraso en trabajos y asi facilitar la eficiencia en que el administrador note estos errores.
+
+    <div className="terminal-loader">
+      <div className="terminal-header">
+        <div className="terminal-controls">
+          <div className="terminal-control close"></div>
+          <div className="terminal-control minimize"></div>
+          <div className="terminal-control maximize"></div>
+        </div>
+        <div className="terminal-title">Status · GEMA Admin</div>
+      </div>
+      <div className="terminal-content">
+        <div className="terminal-text">Compilando panel del taller...</div>
+      </div>
+    </div>
+  </div>
+
+  {/* Columna derecha: snapshot del proyecto */}
+  <aside className="context-snapshot relative rounded-2xl border border-slate-800 bg-slate-950 p-4 text-slate-50 shadow-xl">
+    <div className="pointer-events-none absolute inset-0 rounded-2xl bg-gradient-to-r from-indigo-500/40 via-purple-500/30 to-pink-500/30 opacity-40 blur-md"></div>
+    <div className="relative space-y-4">
+      <header className="flex items-center justify-between gap-2">
+        <div className="flex items-center gap-2">
+          <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-gradient-to-br from-indigo-500 to-purple-500">
+            <span className="text-xs font-bold">GA</span>
+          </div>
+          <div>
+            <p className="text-xs font-semibold">Snapshot del proyecto</p>
+            <p className="text-[10px] text-slate-400">
+              Taller automotriz • Inventario • Evaluaciones
+            </p>
+          </div>
+        </div>
+        <span className="flex items-center gap-1 rounded-full bg-emerald-500/10 px-2 py-1 text-[10px] font-medium text-emerald-400">
+          <span className="h-1.5 w-1.5 rounded-full bg-emerald-400"></span>
+          En producción
+        </span>
+      </header>
+
+      <div className="grid grid-cols-2 gap-3 text-xs">
+        <div className="rounded-lg bg-slate-900/70 p-3">
+          <p className="font-medium text-slate-300">Tiempo de registro</p>
+          <p className="mt-1 text-lg font-semibold text-emerald-400">5 ➝ 1.5 min</p>
+          <p className="mt-1 text-[10px] text-slate-400">
+            Reducción en captura por carga.
+          </p>
+        </div>
+        <div className="rounded-lg bg-slate-900/70 p-3">
+          <p className="font-medium text-slate-300">Stack clave</p>
+          <p className="mt-1 text-[11px] leading-snug text-slate-100">
+            Spring Boot + Oracle SQL + REST
+          </p>
+          <p className="mt-1 text-[10px] text-slate-400">
+            APIs + serialización con Gson.
+          </p>
+        </div>
+      </div>
+
+      <div className="space-y-2">
+        <p className="text-[11px] font-semibold text-slate-300">
+          Tipos de mejoras
+        </p>
+        <ul className="space-y-1 text-[11px] text-slate-300">
+          <li>• Menos papeleo, más datos estructurados.</li>
+          <li>• Exportes a CSV/XLS y envío por correo.</li>
+          <li>• Normalización de base y consultas seguras.</li>
+        </ul>
+      </div>
+    </div>
+  </aside>
+</div>
+
+## Vistas del panel
+
+<div className="project-carousel">
+  <div className="project-carousel-body">
+    <div className="project-carousel-slide is-active">
+      <img
+        src="/images/proyectos/Administrador/home.jpeg"
+        alt="Dashboard principal de GEMA Admin"
+      />
+    </div>
+    <div className="project-carousel-slide">
+      <img
+        src="/images/proyectos/Administrador/almacen.jpeg"
+        alt="Almacen"
+      />
+    </div>
+    <div className="project-carousel-slide">
+      <img
+        src="/images/proyectos/Administrador/valuaciones.jpeg"
+        alt="Reportes y exportes de evaluaciones"
+      />
+    </div>
+    <div className="project-carousel-slide">
+      <img
+        src="/images/proyectos/Administrador/valuaciones2.jpeg"
+        alt="Reportes y exportes de evaluaciones"
+      />
+    </div>
+    <div className="project-carousel-slide">
+      <img
+        src="/images/proyectos/Administrador/empleados.jpeg"
+        alt="Seccion de empleados y usuarios"
+      />
+    </div>
+    <div className="project-carousel-slide">
+      <img
+        src="/images/proyectos/Administrador/empleados2.jpeg"
+        alt="Seccion de empleados y usuarios"
+      />
+    </div>
+    <div className="project-carousel-slide">
+      <img
+        src="/images/proyectos/Administrador/correo1.jpeg"
+        alt="Correos"
+      />
+    </div>
+    <div className="project-carousel-slide">
+      <img
+        src="/images/proyectos/Administrador/correo2.jpeg"
+        alt="Correos"
+      />
+    </div>
+    <div className="project-carousel-slide">
+      <img
+        src="/images/proyectos/Administrador/correo3.jpeg"
+        alt="Correos"
+      />
+    </div>
+    <div className="project-carousel-slide">
+      <img
+        src="/images/proyectos/Administrador/correo4.jpeg"
+        alt="Correos"
+      />
+    </div>
+  </div>
+
+  <button className="project-carousel-btn prev" type="button">&lt;</button>
+  <button className="project-carousel-btn next" type="button">&gt;</button>
+
+  <div className="project-carousel-pagination">
+    <img
+      src="/images/proyectos/Administrador/home.jpeg"
+      className="project-carousel-thumb is-active"
+      alt="Vista 1"
+    />
+    <img
+      src="/images/proyectos/Administrador/almacen.jpeg"
+      className="project-carousel-thumb"
+      alt="Vista 2"
+    />
+    <img
+      src="/images/proyectos/Administrador/valuaciones.jpeg"
+      className="project-carousel-thumb"
+      alt="Vista 3"
+    />
+    <img
+      src="/images/proyectos/Administrador/valuaciones2.jpeg"
+      className="project-carousel-thumb"
+      alt="Vista 4"
+    />
+    <img
+      src="/images/proyectos/Administrador/empleados.jpeg"
+      className="project-carousel-thumb"
+      alt="Vista 5"
+    />
+    <img
+      src="/images/proyectos/Administrador/empleados2.jpeg"
+      className="project-carousel-thumb"
+      alt="Vista 6"
+    />
+    <img
+      src="/images/proyectos/Administrador/correo1.jpeg"
+      className="project-carousel-thumb"
+      alt="Vista 7"
+    />
+    <img
+      src="/images/proyectos/Administrador/correo2.jpeg"
+      className="project-carousel-thumb"
+      alt="Vista 8"
+    />
+    <img
+      src="/images/proyectos/Administrador/correo3.jpeg"
+      className="project-carousel-thumb"
+      alt="Vista 9"
+    />
+    <img
+      src="/images/proyectos/Administrador/correo4.jpeg"
+      className="project-carousel-thumb"
+      alt="Vista 10"
+    />
+  </div>
+</div>
+
+<script type="module">{`
+  const initCarousel = () => {
+    const carousel = document.querySelector('.project-carousel');
+    if (!carousel) return;
+
+    const slides = carousel.querySelectorAll('.project-carousel-slide');
+    const thumbs = carousel.querySelectorAll('.project-carousel-thumb');
+    const prevBtn = carousel.querySelector('.prev');
+    const nextBtn = carousel.querySelector('.next');
+    
+    let currentIndex = 0;
+
+    const showSlide = (index) => {
+      currentIndex = ((index % slides.length) + slides.length) % slides.length;
+      
+      slides.forEach((slide, i) => {
+        slide.classList.toggle('is-active', i === currentIndex);
+      });
+      
+      thumbs.forEach((thumb, i) => {
+        thumb.classList.toggle('is-active', i === currentIndex);
+      });
+    };
+
+    prevBtn?.addEventListener('click', () => showSlide(currentIndex - 1));
+    nextBtn?.addEventListener('click', () => showSlide(currentIndex + 1));
+
+    thumbs.forEach((thumb, index) => {
+      thumb.addEventListener('click', () => showSlide(index));
+    });
+  };
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initCarousel);
+  } else {
+    initCarousel();
+  }
+`}</script>
+
+## Archivos generados por el software
+
+<div class="sample-card-grid">
+  <div class="sample-card">
+    <span class="sample-card__title">Valuaciones  Particular</span>
+    <p class="sample-card__content">
+      Reporte en csv generado por el sistema para revisar las unidades entradas de forma particular 
+      durante un lapso de tiempo ingresado en el sistema (archivo muestra).
+    </p>
+
+    <div class="sample-card__actions">
+      <a
+        href="/muestras/particular.csv"
+        download
+        class="sample-card__button"
+      >
+        Descargar CSV
+      </a>
+    </div>  
+  </div>
+
+  <div class="sample-card">
+    <span class="sample-card__title">Valuaciones  Aseguradora</span>
+    <p class="sample-card__content">
+      Reporte en csv generado por el sistema para revisar las unidades entradas por aseguradora 
+      durante un lapso de tiempo ingresado en el sistema (archivo muestra).
+    </p>
+
+    <div class="sample-card__actions">
+      <a
+        href="/muestras/aseguradora.csv"
+        download
+        class="sample-card__button"
+      >
+        Descargar CSV
+      </a>
+    </div>  
+  </div>
+
+  <div class="sample-card">
+    <span class="sample-card__title">Reporte Almacen</span>
+    <p class="sample-card__content">
+      Reporte en csv generado por el sistema para revisar las refacciones en estado (Alta, Uso, Recibidas) 
+      durante un lapso de tiempo ingresado en el sistema (archivo muestra).
+    </p>
+
+    <div class="sample-card__actions">
+      <a
+        href="/muestras/almacen.csv"
+        download
+        class="sample-card__button"
+      >
+        Descargar CSV
+      </a>
+    </div>  
+  </div>
+
+  <div class="sample-card">
+    <span class="sample-card__title">Valuacion</span>
+    <p class="sample-card__content">
+      PDF producto de la generacion de la valuacion con las refacciones solicitadas asociada a una unidad 
+      ,el cual muestra la estructura del reporte de sus refacciones el mismo que se envia 
+      atravez del sistema por correo electronico (archivo muestra).
+    </p>
+
+    <div class="sample-card__actions">
+      <a
+        href="/muestras/reportrefac.pdf"
+        download
+        class="sample-card__button"
+      >
+        Descargar PDF
+      </a>
+    </div>
+  </div>
+
+  <div class="sample-card">
+    <span class="sample-card__title">Volante de admision</span>
+    <p class="sample-card__content">
+      PDF generado por el sistema con los datos del cliente y su vehiculo, al ingresarlo al taller
+      de manera particular o por aseguradora (archivo muestra).
+    </p>
+
+    <div class="sample-card__actions">
+      <a
+        href="/muestras/ordadmision.pdf"
+        download
+        class="sample-card__button"
+      >
+        Descargar PDF 
+      </a>
+    </div>  
+  </div>
+</div>
+
+
+---
+
+## Arquitectura y diseño técnico
+
+<div className="not-prose w-full grid gap-6 md:grid-cols-3 mt-4 arquitectura-grid">
+  <div className="case-card">
+    <div className="case-card-border"></div>
+    <div className="card_title__container">
+      <span className="case-card-title">Arquitectura</span>
+      <p className="case-card-sub">Diseño general del backend.</p>
+    </div>
+    <hr className="case-card-line" />
+    <ul className="case-card-list">
+      <li className="case-card-list-item">
+        <span className="case-card-check">
+          <svg viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
+            <path d="M12.416 3.376a.75.75 0 0 1 .208 1.04l-5 7.5a.75.75 0 0 1-1.154.114l-3-3a.75.75 0 0 1 1.06-1.06l2.353 2.353 4.493-6.74a.75.75 0 0 1 1.04-.207Z"></path>
+          </svg>
+        </span>
+        <span>Backend en <strong>Spring Boot</strong> con APIs REST.</span>
+      </li>
+      <li className="case-card-list-item">
+        <span className="case-card-check">
+          <svg viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
+            <path d="M12.416 3.376a.75.75 0 0 1 .208 1.04l-5 7.5a.75.75 0 0 1-1.154.114l-3-3a.75.75 0 0 1 1.06-1.06l2.353 2.353 4.493-6.74a.75.75 0 0 1 1.04-.207Z"></path>
+          </svg>
+        </span>
+        <span>Persistencia con <strong>Oracle SQL</strong> y Workbench.</span>
+      </li>
+      <li className="case-card-list-item">
+        <span className="case-card-check">
+          <svg viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
+            <path d="M12.416 3.376a.75.75 0 0 1 .208 1.04l-5 7.5a.75.75 0 0 1-1.154.114l-3-3a.75.75 0 0 1 1.06-1.06l2.353 2.353 4.493-6.74a.75.75 0 0 1 1.04-.207Z"></path>
+          </svg>
+        </span>
+        <span>JPA/Hibernate para el mapeo objeto–relacional.</span>
+      </li>
+      <li className="case-card-list-item">
+        <span className="case-card-check">
+          <svg viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
+            <path d="M12.416 3.376a.75.75 0 0 1 .208 1.04l-5 7.5a.75.75 0 0 1-1.154.114l-3-3a.75.75 0 0 1 1.06-1.06l2.353 2.353 4.493-6.74a.75.75 0 0 1 1.04-.207Z"></path>
+          </svg>
+        </span>
+        <span>Serialización con <strong>Gson</strong> entre capas.</span>
+      </li>
+    </ul>
+  </div>
+
+  <div className="case-card">
+    <div className="case-card-border"></div>
+    <div className="card_title__container">
+      <span className="case-card-title">Módulos principales</span>
+      <p className="case-card-sub">Qué resuelve el sistema.</p>
+    </div>
+    <hr className="case-card-line" />
+    <ul className="case-card-list">
+      <li className="case-card-list-item">
+        <span className="case-card-check">
+          <svg viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
+            <path d="M12.416 3.376a.75.75 0 0 1 .208 1.04l-5 7.5a.75.75 0 0 1-1.154.114l-3-3a.75.75 0 0 1 1.06-1.06l2.353 2.353 4.493-6.74a.75.75 0 0 1 1.04-.207Z"></path>
+          </svg>
+        </span>
+        <span>Gestión de entradas/salidas de autos.</span>
+      </li>
+      <li className="case-card-list-item">
+        <span className="case-card-check">
+          <svg viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
+            <path d="M12.416 3.376a.75.75 0 0 1 .208 1.04l-5 7.5a.75.75 0 0 1-1.154.114l-3-3a.75.75 0 0 1 1.06-1.06l2.353 2.353 4.493-6.74a.75.75 0 0 1 1.04-.207Z"></path>
+          </svg>
+        </span>
+        <span>Control de refacciones y existencias.</span>
+      </li>
+      <li className="case-card-list-item">
+        <span className="case-card-check">
+          <svg viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
+            <path d="M12.416 3.376a.75.75 0 0 1 .208 1.04l-5 7.5a.75.75 0 0 1-1.154.114l-3-3a.75.75 0 0 1 1.06-1.06l2.353 2.353 4.493-6.74a.75.75 0 0 1 1.04-.207Z"></path>
+          </svg>
+        </span>
+        <span>Evaluaciones y reportes descargables.</span>
+      </li>
+      <li className="case-card-list-item">
+        <span className="case-card-check">
+          <svg viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
+            <path d="M12.416 3.376a.75.75 0 0 1 .208 1.04l-5 7.5a.75.75 0 0 1-1.154.114l-3-3a.75.75 0 0 1 1.06-1.06l2.353 2.353 4.493-6.74a.75.75 0 0 1 1.04-.207Z"></path>
+          </svg>
+        </span>
+        <span>Exportes a CSV/XLS y envío por correo.</span>
+      </li>
+    </ul>
+  </div>
+
+  <div className="case-card">
+    <div className="case-card-border"></div>
+    <div className="card_title__container">
+      <span className="case-card-title">Integraciones</span>
+      <p className="case-card-sub">Cómo se conecta con otros sistemas.</p>
+    </div>
+    <hr className="case-card-line" />
+    <ul className="case-card-list">
+      <li className="case-card-list-item">
+        <span className="case-card-check">
+          <svg viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
+            <path d="M12.416 3.376a.75.75 0 0 1 .208 1.04l-5 7.5a.75.75 0 0 1-1.154.114l-3-3a.75.75 0 0 1 1.06-1.06l2.353 2.353 4.493-6.74a.75.75 0 0 1 1.04-.207Z"></path>
+          </svg>
+        </span>
+        <span>APIs preparadas para futuras integraciones (facturación, citas).</span>
+      </li>
+      <li className="case-card-list-item">
+        <span className="case-card-check">
+          <svg viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
+            <path d="M12.416 3.376a.75.75 0 0 1 .208 1.04l-5 7.5a.75.75 0 0 1-1.154.114l-3-3a.75.75 0 0 1 1.06-1.06l2.353 2.353 4.493-6.74a.75.75 0 0 1 1.04-.207Z"></path>
+          </svg>
+        </span>
+        <span>Normalización de base y consultas seguras.</span>
+      </li>
+    </ul>
+  </div>
+</div>
+
+### Stack destacado
+
+<div className="stack-cards mt-4">
+  <div className="stack-card red">
+    <p className="tip">Java & Spring Boot</p>
+    <p className="second-text">APIs REST, servicios, validaciones.</p>
+  </div>
+  <div className="stack-card blue">
+    <p className="tip">SQL & Modelado</p>
+    <p className="second-text">Tablas, relaciones, performance.</p>
+  </div>
+  <div className="stack-card green">
+    <p className="tip">Productividad</p>
+    <p className="second-text">Exports, reportes y menos papeleo.</p>
+  </div>
+</div>
+
+---
+
+## Retos
+
+<div className="case-card mt-3 case-card-left">
+  <div className="case-card-border"></div>
+  <div className="card_title__container">
+    <span className="case-card-title">Retos principales</span>
+    <p className="case-card-sub">Dolores reales del taller.</p>
+  </div>
+  <hr className="case-card-line" />
+  <ul className="case-card-list">
+    <li className="case-card-list-item">
+      <span className="case-card-check">
+        <svg viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
+          <path d="M12.416 3.376a.75.75 0 0 1 .208 1.04l-5 7.5a.75.75 0 0 1-1.154.114l-3-3a.75.75 0 0 1 1.06-1.06l2.353 2.353 4.493-6.74a.75.75 0 0 1 1.04-.207Z"></path>
+        </svg>
+      </span>
+      <span>Reducir el tiempo de registro por carga de ~5 min a ~1.5 min.</span>
+    </li>
+    <li className="case-card-list-item">
+      <span className="case-card-check">
+        <svg viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
+          <path d="M12.416 3.376a.75.75 0 0 1 .208 1.04l-5 7.5a.75.75 0 0 1-1.154.114l-3-3a.75.75 0 0 1 1.06-1.06l2.353 2.353 4.493-6.74a.75.75 0 0 1 1.04-.207Z"></path>
+        </svg>
+      </span>
+      <span>Evitar pérdidas de datos entre hojas sueltas y capturas manuales.</span>
+    </li>
+    <li className="case-card-list-item">
+      <span className="case-card-check">
+        <svg viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
+          <path d="M12.416 3.376a.75.75 0 0 1 .208 1.04l-5 7.5a.75.75 0 0 1-1.154.114l-3-3a.75.75 0 0 1 1.06-1.06l2.353 2.353 4.493-6.74a.75.75 0 0 1 1.04-.207Z"></path>
+        </svg>
+      </span>
+      <span>Mantener consistencia entre inventario, evaluaciones y reportes.</span>
+    </li>
+  </ul>
+</div>
+
+---
+
+## Solución
+
+<div className="case-card mt-3 case-card-right">
+  <div className="case-card-border"></div>
+  <div className="card_title__container">
+    <span className="case-card-title">Diseño de la solución</span>
+    <p className="case-card-sub">Qué se hizo técnicamente.</p>
+  </div>
+  <hr className="case-card-line" />
+  <ul className="case-card-list">
+    <li className="case-card-list-item">
+      <span className="case-card-check">
+        <svg viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
+          <path d="M12.416 3.376a.75.75 0 0 1 .208 1.04l-5 7.5a.75.75 0 0 1-1.154.114l-3-3a.75.75 0 0 1 1.06-1.06l2.353 2.353 4.493-6.74a.75.75 0 0 1 1.04-.207Z"></path>
+        </svg>
+      </span>
+      <span>Modelo relacional normalizado para inventario, autos y evaluaciones.</span>
+    </li>
+    <li className="case-card-list-item">
+      <span className="case-card-check">
+        <svg viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
+          <path d="M12.416 3.376a.75.75 0 0 1 .208 1.04l-5 7.5a.75.75 0 0 1-1.154.114l-3-3a.75.75 0 0 1 1.06-1.06l2.353 2.353 4.493-6.74a.75.75 0 0 1 1.04-.207Z"></path>
+        </svg>
+      </span>
+      <span>APIs REST claras (<code>/cargas</code>, <code>/refacciones</code>, <code>/evaluaciones</code>) con validaciones.</span>
+    </li>
+    <li className="case-card-list-item">
+      <span className="case-card-check">
+        <svg viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
+          <path d="M12.416 3.376a.75.75 0 0 1 .208 1.04l-5 7.5a.75.75 0 0 1-1.154.114l-3-3a.75.75 0 0 1 1.06-1.06l2.353 2.353 4.493-6.74a.75.75 0 0 1 1.04-.207Z"></path>
+        </svg>
+      </span>
+      <span>Serialización/deserialización con <strong>Gson</strong> para comunicación eficiente entre capas.</span>
+    </li>
+    <li className="case-card-list-item">
+      <span className="case-card-check">
+        <svg viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
+          <path d="M12.416 3.376a.75.75 0 0 1 .208 1.04l-5 7.5a.75.75 0 0 1-1.154.114l-3-3a.75.75 0 0 1 1.06-1.06l2.353 2.353 4.493-6.74a.75.75 0 0 1 1.04-.207Z"></path>
+        </svg>
+      </span>
+      <span>Pantallas centradas en productividad: tablas filtrables por fecha y estado.</span>
+    </li>
+  </ul>
+</div>
+
+---
+
+## Resultado
+
+<div className="case-card mt-3 case-card-left">
+  <div className="case-card-border"></div>
+  <div className="card_title__container">
+    <span className="case-card-title">Impacto en el taller</span>
+    <p className="case-card-sub">Qué cambió después del deploy.</p>
+  </div>
+  <hr className="case-card-line" />
+  <ul className="case-card-list">
+    <li className="case-card-list-item">
+      <span className="case-card-check">
+        <svg viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
+          <path d="M12.416 3.376a.75.75 0 0 1 .208 1.04l-5 7.5a.75.75 0 0 1-1.154.114l-3-3a.75.75 0 0 1 1.06-1.06l2.353 2.353 4.493-6.74a.75.75 0 0 1 1.04-.207Z"></path>
+        </svg>
+      </span>
+      <span>El proceso de registro por carga se reduce a ~1.5 minutos.</span>
+    </li>
+    <li className="case-card-list-item">
+      <span className="case-card-check">
+        <svg viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
+          <path d="M12.416 3.376a.75.75 0 0 1 .208 1.04l-5 7.5a.75.75 0 0 1-1.154.114l-3-3a.75.75 0 0 1 1.06-1.06l2.353 2.353 4.493-6.74a.75.75 0 0 1 1.04-.207Z"></path>
+        </svg>
+      </span>
+      <span>Menos errores de captura y datos centralizados en una sola base.</span>
+    </li>
+    <li className="case-card-list-item">
+      <span className="case-card-check">
+        <svg viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
+          <path d="M12.416 3.376a.75.75 0 0 1 .208 1.04l-5 7.5a.75.75 0 0 1-1.154.114l-3-3a.75.75 0 0 1 1.06-1.06l2.353 2.353 4.493-6.74a.75.75 0 0 1 1.04-.207Z"></path>
+        </svg>
+      </span>
+      <span>Reportes exportables en uno o dos clics y listos para enviarse por correo.</span>
+    </li>
+    <li className="case-card-list-item">
+      <span className="case-card-check">
+        <svg viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
+          <path d="M12.416 3.376a.75.75 0 0 1 .208 1.04l-5 7.5a.75.75 0 0 1-1.154.114l-3-3a.75.75 0 0 1 1.06-1.06l2.353 2.353 4.493-6.74a.75.75 0 0 1 1.04-.207Z"></path>
+        </svg>
+      </span>
+      <span>Base preparada para crecer con más módulos (facturación, citas, etc.).</span>
+    </li>
+  </ul>
+
+  <button className="case-card-button">Ver código en GitHub</button>
+</div>

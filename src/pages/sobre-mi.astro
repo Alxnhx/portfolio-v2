@@ -1,0 +1,18 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+---
+
+<BaseLayout title="Sobre mí — Alan Hernández">
+  <Header />
+  <main class="mx-auto max-w-3xl px-4 mt-10 prose prose-slate dark:prose-invert">
+    <h1>Sobre mí</h1>
+    <p>Me especializo en backend con Java/Spring y SQL. Disfruto diseñar modelos de datos, escribir servicios REST bien probados y documentados.</p>
+    <ul>
+      <li>Buenas prácticas: pruebas (JUnit), versionado, documentación (Swagger).</li>
+      <li>Trabajo en equipo y comunicación clara.</li>
+    </ul>
+  </main>
+  <Footer />
+</BaseLayout>

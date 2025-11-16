@@ -1,0 +1,21 @@
+---
+const categories = [
+  { name: 'En producción', items: ['Java', 'Spring Boot', 'JPA/Hibernate', 'REST', 'MySQL/PostgreSQL'] },
+  { name: 'Proyectos', items: ['JavaFX', 'Docker básico', 'JUnit', 'Swagger/OpenAPI'] },
+  { name: 'En aprendizaje', items: ['Kotlin', 'Kafka', 'AWS RDS'] }
+];
+---
+
+<section class="mt-12">
+  <h2 class="font-display text-2xl mb-4">Tecnologías</h2>
+  <div class="grid md:grid-cols-3 gap-6">
+    {categories.map((c) => (
+      <div class="rounded-xl border p-4 border-slate-200 dark:border-slate-800">
+        <h3 class="font-semibold mb-3">{c.name}</h3>
+        <div class="flex flex-wrap gap-2">
+          {c.items.map((i) => <span class="text-xs px-2 py-1 rounded border border-slate-200 dark:border-slate-700">{i}</span>)}
+        </div>
+      </div>
+    ))}
+  </div>
+</section>

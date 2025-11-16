@@ -1,0 +1,245 @@
+---
+export interface ProjectCardProps {
+  title: string;
+  summary: string;
+  href: string;
+  image?: string;
+  stack?: string[];
+}
+
+const {
+  title,
+  summary,
+  href,
+  image = '/images/proyectos/',
+  stack = [],
+} = Astro.props as ProjectCardProps;
+
+const mainStack = stack && stack.length ? stack.slice(0, 3).join(' · ') : 'Java · Spring Boot · SQL';
+---
+
+<a href={href} class="home-project-card group">
+  <div class="home-project-top">
+    <div class="home-project-top-border"></div>
+    <div class="home-project-top-icons">
+      <div class="home-project-logo">
+        <span class="home-project-logo-text">
+          {stack && stack.length ? stack[0] : 'Backend'}
+        </span>
+      </div>
+      <div class="home-project-social">
+        <span class="home-project-dot"></span>
+        <span class="home-project-dot"></span>
+        <span class="home-project-dot"></span>
+      </div>
+    </div>
+
+    <figure class="home-project-thumb">
+      <img src={image} alt={title} loading="lazy" />
+    </figure>
+  </div>
+
+  <div class="home-project-bottom">
+    <span class="home-project-title">{title}</span>
+    <p class="home-project-summary">{summary}</p>
+    <div class="home-project-row">
+      <div class="home-project-item">
+        <span class="home-project-item-big">Stack</span>
+        <span class="home-project-item-small">{mainStack}</span>
+      </div>
+      <div class="home-project-item home-project-item-link">
+        <span class="home-project-item-big group-hover:underline">
+          Ver caso
+        </span>
+        <span class="home-project-item-small">Detalle del proyecto</span>
+      </div>
+    </div>
+  </div>
+</a>
+
+<style>
+.home-project-card {
+  width: 100%;
+  max-width: 260px;         
+  margin-inline: auto;      
+  border-radius: 20px;
+  background: #0f172a;
+  padding: 6px;
+  overflow: hidden;
+  box-shadow: rgba(15, 23, 42, 0.45) 0px 14px 35px 0px;
+  transition: transform 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275),
+    box-shadow 0.3s ease;
+  display: flex;
+  flex-direction: column;
+  text-decoration: none;
+  color: inherit;
+}
+
+.home-project-card:hover {
+  transform: scale(1.03) translateY(-2px);
+  box-shadow: rgba(56, 189, 248, 0.5) 0px 14px 40px 0px;
+}
+
+.home-project-top {
+  height: 130px;
+  border-radius: 16px;
+  display: flex;
+  flex-direction: column;
+  background: linear-gradient(
+    135deg,
+    rgb(14, 165, 233) 0%,
+    rgb(168, 85, 247) 45%,
+    rgb(34, 197, 94) 100%
+  );
+  position: relative;
+  overflow: hidden;
+}
+
+.home-project-top-border {
+  border-bottom-right-radius: 10px;
+  height: 30px;
+  width: 130px;
+  background: #0f172a;
+  position: relative;
+  transform: skew(-40deg);
+  box-shadow: -10px -10px 0 0 #0f172a;
+}
+
+.home-project-top-border::before {
+  content: '';
+  position: absolute;
+  width: 14px;
+  height: 14px;
+  top: 0;
+  right: -14px;
+  background: transparent;
+  border-top-left-radius: 10px;
+  box-shadow: -5px -5px 0 2px #0f172a;
+}
+
+.home-project-top::before {
+  content: '';
+  position: absolute;
+  top: 30px;
+  left: 0;
+  background: transparent;
+  height: 15px;
+  width: 15px;
+  border-top-left-radius: 15px;
+  box-shadow: -5px -5px 0 2px #0f172a;
+}
+
+.home-project-top-icons {
+  position: absolute;
+  top: 0;
+  width: 100%;
+  height: 30px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.home-project-logo {
+  height: 100%;
+  padding: 7px 0 7px 14px;
+  display: flex;
+  align-items: center;
+}
+
+.home-project-logo-text {
+  font-size: 0.72rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.16em;
+  color: #0f172a;
+  padding: 0.15rem 0.6rem;
+  border-radius: 999px;
+  background: rgba(248, 250, 252, 0.85);
+}
+
+.home-project-social {
+  height: 100%;
+  padding: 9px 14px;
+  display: flex;
+  gap: 6px;
+  align-items: center;
+}
+
+.home-project-dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 999px;
+  background: #0f172a;
+  opacity: 0.7;
+}
+
+.home-project-thumb {
+  position: absolute;
+  inset: 32px 10px 10px 10px;
+  border-radius: 14px;
+  overflow: hidden;
+  background: rgba(15, 23, 42, 0.35);
+}
+
+.home-project-thumb img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* Bottom section */
+
+.home-project-bottom {
+  margin-top: 14px;
+  padding: 10px 6px 10px;
+}
+
+.home-project-title {
+  display: block;
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: #e5e7eb;
+  text-align: center;
+  letter-spacing: 0.03em;
+}
+
+.home-project-summary {
+  font-size: 0.78rem;
+  color: rgb(148 163 184);
+  margin-top: 0.45rem;
+}
+
+.home-project-row {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 0.9rem;
+  gap: 0.4rem;
+}
+
+.home-project-item {
+  flex: 1 1 0;
+  text-align: center;
+  padding: 4px;
+  color: rgba(148, 198, 243, 0.85);
+}
+
+.home-project-item + .home-project-item {
+  border-left: 1px solid rgba(148, 163, 184, 0.35);
+}
+
+.home-project-item-big {
+  display: block;
+  font-size: 0.78rem;
+  font-weight: 600;
+  color: #e5e7eb;
+}
+
+.home-project-item-small {
+  display: block;
+  font-size: 0.66rem;
+  margin-top: 2px;
+}
+
+.home-project-item-link {
+  cursor: pointer;
+}
+</style>

@@ -1,11 +1,1414 @@
 ---
-import Welcome from '../components/Welcome.astro';
-import Layout from '../layouts/Layout.astro';
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Footer from '../components/Footer.astro';
+import ProjectCard from '../components/ProjectCard.astro';
+import { getCollection, type CollectionEntry } from 'astro:content';
 
-// Welcome to Astro! Wondering what to do next? Check out the Astro documentation at https://docs.astro.build
-// Don't want to use any of this? Delete everything in this file, the `assets`, `components`, and `layouts` directories, and start fresh.
+const proyectos: CollectionEntry<'proyectos'>[] = await getCollection('proyectos');
+
+const recientes = [...proyectos]
+  .sort((a, b) =>
+    new Date(b.data.date).getTime() - new Date(a.data.date).getTime()
+  )
+  .slice(0, 6); 
 ---
 
-<Layout>
-	<Welcome />
-</Layout>
+<BaseLayout>
+  {/* HERO */}
+  <section class="home-hero mx-auto max-w-6xl px-4 pt-12 pb-16 lg:pt-16 lg:pb-20">
+    <div class="grid gap-10 lg:grid-cols-[minmax(0,1.6fr)_minmax(0,1.1fr)] lg:items-center">
+      <div class="space-y-6">
+        <p class="text-xs font-semibold tracking-[0.25em] uppercase text-sky-400">
+          Backend con conocimiento en frontend <br>· Java · C# · HTML · CSS · SQL · APIs REST ·
+        </p>
+
+        {/* Card del nombre */}
+        <div class="home-name-card">
+          <div class="home-name-card-inner">
+            <p class="home-name-title">
+              Alan Valentín Hernández Olvera
+            </p>
+            <p class="home-name-subtitle">
+              Desarrollador Java · C# · HTML · CSS · SQL · Back-end y frontend · 
+            </p>
+          </div>
+        </div>
+
+        <p class="text-sm md:text-base text-slate-600 dark:text-slate-300 max-w-xl">
+          Desarrollador full-stack orientado a back-end con conocimientos en front-end, 
+          que disfruta construir paneles internos, APIs limpias y herramientas que 
+          realmente usan los equipos en el día a día para automatizar procesos y mejorar 
+          la eficiencia de la empresa. Trabajo principalmente con Java, Spring Boot y 
+          bases de datos relacionales, explorando integraciones de IA en el software 
+          (OpenAI, Gemini, Meta Developers) con tecnologías no-code y código puro.
+        </p>
+
+        <div class="flex flex-wrap gap-3">
+          <a
+            href="#proyectos"
+            class="inline-flex items-center justify-center rounded-full bg-gradient-to-r from-sky-500 via-fuchsia-500 to-emerald-400 px-5 py-2.5 text-xs md:text-sm font-semibold text-slate-950 shadow-lg shadow-sky-500/40 transition hover:scale-[1.03] hover:shadow-sky-500/70"
+          >
+            Ver proyectos
+          </a>
+          <a
+            href="#contacto"
+            class="inline-flex items-center justify-center rounded-full border border-slate-300 bg-white/90 px-5 py-2.5 text-xs md:text-sm font-medium text-slate-800 shadow-sm transition hover:bg-slate-50 dark:border-slate-700 dark:bg-slate-900/80 dark:text-slate-100"
+          >
+            Contáctame
+          </a>
+        </div>
+      </div>
+
+      {/* Lado derecho del hero: foto + badge */}
+      <div class="relative flex justify-center lg:justify-end">
+        <div class="home-hero-photo">
+          <img
+            src="/images/proyectos/foto/perfil.jpeg"
+            alt="Foto de perfil"
+            loading="lazy"
+          />
+        </div>
+
+        <div class="home-hero-badge">
+          <p class="home-hero-badge-title">Stack actual</p>
+          <p class="home-hero-badge-body">Java · Spring Boot · SQL · REST</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  {/* PERFIL PROFESIONAL */}
+  <section id="perfil" class="mx-auto max-w-6xl px-4 mt-4 md:mt-0">
+    <h2 class="home-section-title">Perfil profesional</h2>
+
+    <div class="home-profile-card">
+      <div class="home-profile-glass">
+        <p class="home-profile-text">
+          Esta es mi página donde concentro mi trayectoria, proyectos y tecnologías con 
+          las que trabajo. Me interesa resolver problemas reales en empresas: automatizar 
+          procesos, implementar IA cuando se requiere, reducir la captura manual y dejar 
+          sistemas con buena documentación.
+        </p>
+
+        <div class="home-profile-grid">
+          <div>
+            <h3>Lo que aporto</h3>
+            <ul>
+              <li>Diseño de modelos de base de datos y consultas eficientes.</li>
+              <li>APIs REST bien estructuradas y versionadas.</li>
+              <li>Reportes, exportación de datos y flujos pensados para usuarios no técnicos.</li>
+              <li>Integraciones con IA dentro de los sistemas cuando aporten valor.</li>
+            </ul>
+          </div>
+          <div>
+            <h3>Cómo trabajo</h3>
+            <ul>
+              <li>Comunicación clara con clientes y equipo</li>
+              <li>Documentación de endpoints y decisiones técnicas.</li>
+              <li>Aprendizaje continuo de nuevas herramientas del ecosistema IA y Java.</li>
+              <li>Levantamiento de requerimientos adecuado para la resolución de problemas</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <div class="home-profile-blob"></div>
+    </div>
+  </section>
+
+  {/* EXPERIENCIA */}
+  <section id="experiencia" class="mx-auto max-w-6xl px-4 mt-16">
+    <h2 class="home-section-title">Experiencia</h2>
+
+    <div class="home-exp-timeline">
+      <div class="home-exp-line" aria-hidden="true"></div>
+
+      {/* Experiencia 8 */}
+      <article class="home-exp-item">
+        <div class="home-exp-dot home-exp-dot--current"></div>
+        <div class="home-exp-card">
+          <div class="home-exp-header">
+            <p class="home-exp-role">Desarrollador Full Stack  – Sistema de Asignación de Tareas por WhatsApp</p>
+            <p class="home-exp-time">Septiembre 2025 – Octubre 2025</p>
+          </div>
+          <p class="home-exp-text">
+            Diseñé un sistema que centraliza la asignación de tareas vía WhatsApp, registrando 
+            colaboradores y tareas en SQL Server con área, prioridad y fecha límite. Integré WhatsApp 
+            Business y Zoom para enviar recordatorios programados y enlaces de reunión, además de 
+            reportes automáticos a las 08:00 y 16:30; el despliegue en servidor dedicado permitió 
+            reducir el tiempo de asignación manual y dar visibilidad diaria del avance por colaborador.
+          </p>
+          <div class="home-exp-tags">
+            <span>Maven</span>
+            <span>Java</span>
+            <span>JavaFX</span>
+            <span>Oracle SQL</span>
+            <span>Workbench</span>
+            <span>JPA (Hibernate)</span>
+          </div>
+        </div>
+      </article>
+
+      {/* Experiencia 7 */}
+      <article class="home-exp-item">
+        <div class="home-exp-dot home-exp-dot--current"></div>
+        <div class="home-exp-card">
+          <div class="home-exp-header">
+            <p class="home-exp-role">Desarrollador BackEnd – Analizador de Licitaciones</p>
+            <p class="home-exp-time">Agosto 2025 – Septiembre 2025</p>
+          </div>
+          <p class="home-exp-text">
+            Desarrollé un panel administrativo para centralizar la información del taller: estado del 
+            almacén (refacciones dadas de alta, recibidas y usadas), valuaciones separadas por 
+            aseguradora y particular, y control de empleados y usuarios del sistema. Implementé 
+            exportación de tablas y consultas a Excel, junto con reportes administrativos para apoyar 
+            la toma de decisiones y el seguimiento operativo del taller.
+          </p>
+          <div class="home-exp-tags">
+            <span>Maven</span>
+            <span>Java</span>
+            <span>JavaFX</span>
+            <span>Open AI</span>
+            <span>iText PDF</span>
+          </div>
+        </div>
+      </article>
+
+      {/* Experiencia 6 */}
+      <article class="home-exp-item">
+        <div class="home-exp-dot home-exp-dot--current"></div>
+        <div class="home-exp-card">
+          <div class="home-exp-header">
+            <p class="home-exp-role">Software 3 – Panel Administrativo y Reportes</p>
+            <p class="home-exp-time">Abril 2025 – Julio 2025</p>
+          </div>
+          <p class="home-exp-text">
+            Desarrollé un panel administrativo para centralizar la información del taller: estado del 
+            almacén (refacciones dadas de alta, recibidas y usadas), valuaciones separadas por 
+            aseguradora y particular, y control de empleados y usuarios del sistema. Implementé 
+            exportación de tablas y consultas a Excel, junto con reportes administrativos para apoyar 
+            la toma de decisiones y el seguimiento operativo del taller.
+          </p>
+          <div class="home-exp-tags">
+            <span>Maven</span>
+            <span>Java</span>
+            <span>JavaFX</span>
+            <span>Oracle SQL</span>
+            <span>Workbench</span>
+            <span>JPA (Hibernate)</span>
+          </div>
+        </div>
+      </article>
+
+      {/* Experiencia 5 */}
+      <article class="home-exp-item">
+        <div class="home-exp-dot home-exp-dot--current"></div>
+        <div class="home-exp-card">
+          <div class="home-exp-header">
+            <p class="home-exp-role">Software 2 – Gestión de Valuaciones y Admisión de Vehículos</p>
+            <p class="home-exp-time">Abril 2025 – Julio 2025</p>
+          </div>
+          <p class="home-exp-text">
+            Construí una aplicación para registrar valuaciones de vehículos y emitir órdenes de admisión, 
+            separando claramente autos de aseguradoras y de clientes particulares. El sistema permite 
+            capturar datos del vehículo, daños, piezas a reemplazar y generar reportes de refacciones 
+            asociadas a cada valuación, así como gestionar la entrega de vehículos y su búsqueda en la 
+            base de datos con una vista general de cada caso.
+          </p>
+          <div class="home-exp-tags">
+            <span>Maven</span>
+            <span>Java</span>
+            <span>JavaFX</span>
+            <span>Oracle SQL</span>
+            <span>Workbench</span>
+            <span>JPA (Hibernate)</span>
+          </div>
+        </div>
+      </article>
+
+      {/* Experiencia 4 */}
+      <article class="home-exp-item">
+        <div class="home-exp-dot home-exp-dot--current"></div>
+        <div class="home-exp-card">
+          <div class="home-exp-header">
+            <p class="home-exp-role">Software 1 – Gestión de Almacén de Refacciones</p>
+            <p class="home-exp-time">Abril 2025 – Julio 2025</p>
+          </div>
+          <p class="home-exp-text">
+            Desarrollé un sistema de gestión de almacén para controlar el ciclo completo de las refacciones: 
+            alta de refacciones pedidas, registro de refacciones recibidas y control de refacciones usadas 
+            en cada servicio. Implementé vistas con tablas dinámicas y filtros para localizar rápidamente 
+            piezas por estado, vehículo o proveedor, asegurando trazabilidad de inventario y reduciendo 
+            errores en el control de almacén.
+          </p>
+          <div class="home-exp-tags">
+            <span>Maven</span>
+            <span>Java</span>
+            <span>JavaFX</span>
+            <span>Oracle SQL</span>
+            <span>Workbench</span>
+            <span>JPA (Hibernate)</span>
+          </div>
+        </div>
+      </article>
+
+      {/* Experiencia 3 */}
+      <article class="home-exp-item">
+        <div class="home-exp-dot home-exp-dot--current"></div>
+        <div class="home-exp-card">
+          <div class="home-exp-header">
+            <p class="home-exp-role">Desarrollador Full Stack – Software de Gestión para Taller Automotriz</p>
+            <p class="home-exp-time">Abril 2025 – Julio 2025</p>
+          </div>
+          <p class="home-exp-text">
+            Suite de tres aplicaciones de escritorio para un taller automotriz: control de refacciones, 
+            gestión de valuaciones y panel administrativo. Diseñé la base de datos (normalización, 
+            configuración en Workbench) y el acceso a datos con JPA/Hibernate, integrando todo en una 
+            solución unificada para aseguradoras y clientes particulares.
+          </p>
+          <div class="home-exp-tags">
+            <span>Maven</span>
+            <span>Java</span>
+            <span>JavaFX</span>
+            <span>Oracle SQL</span>
+            <span>Workbench</span>
+            <span>JPA (Hibernate)</span>
+          </div>
+        </div>
+      </article>
+      
+      {/* Experiencia 2 */}
+      <article class="home-exp-item">
+        <div class="home-exp-dot home-exp-dot--current"></div>
+        <div class="home-exp-card">
+          <div class="home-exp-header">
+            <p class="home-exp-role">Desarrollador Full Stack – Sistema de Control de Gestión de Cargas (Entradas y Salidas)</p>
+            <p class="home-exp-time">Enero 2025 – Abril 2025</p>
+          </div>
+          <p class="home-exp-text">
+            Desarrollo de un sistema de control de cargas en tiempo real que reemplazó formatos en papel, 
+            reduciendo el tiempo de registro de ~5 min a 1.5 min y disminuyendo la pérdida de datos. 
+            Implementé APIs REST con Spring Boot y Oracle SQL, manejo de JSON con Gson, filtrado por fechas 
+            y exportación de reportes en CSV/XLS para envío por correo.
+          </p>
+          <div class="home-exp-tags">
+            <span>Java</span>
+            <span>Spring Boot</span>
+            <span>Oracle SQL</span>
+            <span>APIs REST</span>
+            <span>Adaptación de Hardware</span>
+            <span>Documentación</span>
+          </div>
+        </div>
+      </article>
+
+      {/* Experiencia 1 */}
+      <article class="home-exp-item">
+        <div class="home-exp-dot"></div>
+        <div class="home-exp-card">
+          <div class="home-exp-header">
+            <p class="home-exp-role">AI Trainer · Plataformas de IA generativa</p>
+            <p class="home-exp-time">2023 – 2024</p>
+          </div>
+          <p class="home-exp-text">
+            Entrenamiento y evaluación de modelos de IA a través de tareas de
+            programación, redacción técnica y resolución de problemas, afinando
+            prompts y revisando calidad de respuestas.
+          </p>
+          <div class="home-exp-tags">
+            <span>IA generativa</span>
+            <span>Python básico</span>
+            <span>Redacción técnica</span>
+          </div>
+        </div>
+      </article>
+    </div>
+  </section>
+
+  {/* HABILIDADES Y COMPETENCIAS */}
+  <section id="habilidades" class="mx-auto max-w-6xl px-4 mt-16">
+    <h2 class="home-section-title">Habilidades y competencias</h2>
+    <p class="home-section-subtitle">
+      Cada tarjeta se voltea al pasar el mouse para ver más detalle.
+    </p>
+
+    <div class="home-skills-grid">
+      {/* Java */}
+      <div class="home-skill-card">
+        <div class="home-skill-inner">
+          <div class="home-skill-face home-skill-front">
+            <span class="home-skill-icon">☕</span>
+            <h3 class="home-skill-title">Java</h3>
+            <p class="home-skill-level">Orientado a back-end</p>
+          </div>
+          <div class="home-skill-face home-skill-back">
+            <p>
+              Uso Java para construir servicios, reglas de negocio y validaciones orientadas a sistemas internos y procesos de empresas.
+            </p>
+            <ul>
+              <li>POO, colecciones y streams.</li>
+              <li>Manejo de excepciones y validaciones.</li>
+              <li>Integración con JDBC / JPA y capas de servicio.</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      {/* Spring Boot */}
+      <div class="home-skill-card">
+        <div class="home-skill-inner">
+          <div class="home-skill-face home-skill-front">
+            <span class="home-skill-icon">🌱</span>
+            <h3 class="home-skill-title">Spring Boot</h3>
+            <p class="home-skill-level">APIs REST</p>
+          </div>
+          <div class="home-skill-face home-skill-back">
+            <p>Desarrollo APIs REST y servicios back-end en Spring Boot, conectando bases de datos y frontends o sistemas externos.</p>
+            <ul>
+              <li>Diseño de endpoints REST limpios y versionados.</li>
+              <li>Manejo de seguridad básica, validaciones y errores.</li>
+              <li>Integración con servicios externos y clientes front-end.</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      {/* SQL */}
+      <div class="home-skill-card">
+        <div class="home-skill-inner">
+          <div class="home-skill-face home-skill-front">
+            <span class="home-skill-icon">🗄️</span>
+            <h3 class="home-skill-title">SQL</h3>
+            <p class="home-skill-level">Oracle / SQL Server · Modelado y consultas</p>
+          </div>
+          <div class="home-skill-face home-skill-back">
+            <p>
+            Modelo y consulto bases de datos relacionales para que los sistemas tengan información consistente y fácil de consultar.            
+          </p>
+            <ul>
+              <li>Diseño de tablas y relaciones (modelo lógico y físico).</li>
+              <li>Consultas, filtros y joins para reportes.</li>
+              <li>Optimización básica y soporte a aplicaciones productivas.</li>
+              <li>MySQL / Oracle SQL.</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      {/* C# / .NET */}
+      <div class="home-skill-card">
+        <div class="home-skill-inner">
+          <div class="home-skill-face home-skill-front">
+            <span class="home-skill-icon">⚙️</span>
+            <h3 class="home-skill-title">C# / .NET</h3>
+            <p class="home-skill-level">Servicios y automatización</p>
+          </div>
+          <div class="home-skill-face home-skill-back">
+            <p>
+              Construyo servicios y automatizaciones en C#/.NET para orquestar tareas, integraciones y procesos de negocio.
+            </p>
+            <ul>
+              <li>APIs y servicios en .NET con acceso a datos.</li>
+              <li>Automatización de tareas periódicas y schedulers.</li>
+              <li>Integración con SQL Server y herramientas externas.</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      {/* JavaFX */}
+      <div class="home-skill-card">
+        <div class="home-skill-inner">
+          <div class="home-skill-face home-skill-front">
+            <span class="home-skill-icon">🖥️</span>
+            <h3 class="home-skill-title">JavaFX</h3>
+            <p class="home-skill-level">Aplicaciones de escritorio</p>
+          </div>
+          <div class="home-skill-face home-skill-back">
+            <p>Desarrollo aplicaciones de escritorio en JavaFX para control administrativo, paneles internos y herramientas de uso diario.</p>
+            <ul>
+              <li>Interfaces con tablas, formularios y validaciones.</li>
+              <li>Flujos pensados para usuarios administrativos.</li>
+              <li>Consumo de servicios y acceso a base de datos desde la app.</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      {/* APIs externas e IA */}
+      <div class="home-skill-card">
+        <div class="home-skill-inner">
+          <div class="home-skill-face home-skill-front">
+            <span class="home-skill-icon">🤖</span>
+            <h3 class="home-skill-title">APIs externas e IA</h3>
+            <p class="home-skill-level">OpenAI, WhatsApp, Zoom</p>
+          </div>
+          <div class="home-skill-face home-skill-back">
+            <p>
+              Integro APIs externas e inteligencia artificial para automatizar tareas, análisis de información y comunicación con usuarios.
+            </p>
+            <ul>
+              <li>Integración con OpenAI para análisis de texto y automatización.</li>
+              <li>Uso de WhatsApp Business y webhooks para envío de mensajes.</li>
+              <li>Vinculación con Zoom y otros servicios externos.</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      {/* Arquitectura / diseño */}
+      <div class="home-skill-card">
+        <div class="home-skill-inner">
+          <div class="home-skill-face home-skill-front">
+            <span class="home-skill-icon">📐</span>
+            <h3 class="home-skill-title">Diseño de sistemas</h3>
+            <p class="home-skill-level">Pensando en el flujo completo</p>
+          </div>
+          <div class="home-skill-face home-skill-back">
+            <p>
+              Diseño soluciones viendo el sistema de punta a punta: datos, procesos, usuarios y mantenimiento.
+            </p>
+            <ul>
+              <li>Análisis de requerimientos y casos de uso.</li>
+              <li>Definición de módulos y responsabilidades claras.</li>
+              <li>Enfoque en escalabilidad y facilidad de mantenimiento.</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      {/* Calidad / pruebas */}
+      <div class="home-skill-card">
+        <div class="home-skill-inner">
+          <div class="home-skill-face home-skill-front">
+            <span class="home-skill-icon">✅</span>
+            <h3 class="home-skill-title">Calidad</h3>
+            <p class="home-skill-level">Código mantenible</p>
+          </div>
+          <div class="home-skill-face home-skill-back">
+            <p>
+              Cuido que el código sea legible, probado y fácil de extender, pensando en el equipo que lo mantendrá.
+            </p>
+            <ul>
+              <li>Buenas prácticas de nomenclatura y estructura.</li>
+              <li>Separación de capas y responsabilidades.</li>
+              <li>Uso de estándares de naming.</li>
+              <li>Pruebas manuales y validación de flujos críticos.</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      {/* Trabajo en equipo */}
+      <div class="home-skill-card">
+        <div class="home-skill-inner">
+          <div class="home-skill-face home-skill-front">
+            <span class="home-skill-icon">🤝</span>
+            <h3 class="home-skill-title">Trabajo en equipo</h3>
+            <p class="home-skill-level">Comunicación con negocio</p>
+          </div>
+          <div class="home-skill-face home-skill-back">
+            <p>
+              Me gusta trabajar cerca de negocio y del equipo técnico para alinear lo que se construye con lo que realmente se necesita.
+            </p>
+            <ul>
+              <li>Explicación técnica en lenguaje entendible.</li>
+              <li>Recepción de feedback y ajustes iterativos.</li>
+              <li>Colaboración con otros devs y áreas no técnicas.</li>
+              <li>Reuniones de levantamiento de requerimientos.</li>
+              <li>Explicación de alcances y límites del sistema.</li>
+              <li>Documentación rápida para usuarios finales.</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      {/* Arquitectura / diseño */}
+      <div class="home-skill-card">
+        <div class="home-skill-inner">
+          <div class="home-skill-face home-skill-front">
+            <span class="home-skill-icon">🏃</span>
+            <h3 class="home-skill-title">Metodologías ágiles</h3>
+            <p class="home-skill-level">Scrum · Kanban</p>
+          </div>
+          <div class="home-skill-face home-skill-back">
+            <p>
+              He trabajado con prácticas ágiles para entregar valor en iteraciones cortas y tener siempre algo funcional.
+            </p>
+            <ul>
+              <li>Participación en dailies y planificación de sprints.</li>
+              <li>Gestión de tareas en tableros tipo Kanban.</li>
+              <li>Priorización de entregables junto con negocio.</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      {/* Calidad / pruebas */}
+      <div class="home-skill-card">
+        <div class="home-skill-inner">
+          <div class="home-skill-face home-skill-front">
+            <span class="home-skill-icon">📚</span>
+            <h3 class="home-skill-title">Documentación técnica</h3>
+            <p class="home-skill-level">UML, ER, manuales</p>
+          </div>
+          <div class="home-skill-face home-skill-back">
+            <p>
+              Documentación de sistemas para que otros puedan entender, usar y mantener las soluciones que desarrollo.
+            </p>
+            <ul>
+              <li>Diagramas UML y de arquitectura.</li>
+              <li>Diagramas entidad–relación para bases de datos.</li>
+              <li>Manuales de usuario y guías de uso básico.</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  {/* PROYECTOS */}
+  <section id="proyectos" class="mx-auto max-w-6xl px-4 mt-18 md:mt-20">
+    <div class="flex flex-col md:flex-row md:items-end md:justify-between gap-3 mb-8">
+      <div>
+        <h2 class="home-section-title">Galería de proyectos</h2>
+        <p class="home-section-subtitle max-w-xl">
+          Casos de estudio donde he aplicado Java, Spring Boot y SQL para
+          resolver necesidades reales: paneles administrativos, inventarios,
+          reportes descargables y más clic en <strong>ver caso</strong> para ver la pagina detallada del proyecto.
+        </p>
+      </div>
+    </div>
+
+    <div class="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+      {recientes.map((p) => (
+        <ProjectCard
+          title={p.data.title}
+          summary={p.data.summary}
+          href={`/proyectos/${p.slug}/`}
+          image={p.data.cover}
+          stack={p.data.stack}
+        />
+      ))}
+    </div>
+  </section>
+
+  {/* LOGROS DESTACADOS */}
+    <section
+  id="logros"
+  aria-labelledby="logros-heading"
+  class="mx-auto max-w-6xl px-4 mt-20 space-y-6"
+>
+      <div>
+        <h2
+          id="logros-heading"
+          class="section-title"
+        >
+          Logros destacados
+        </h2>
+        <p class="section-paragraph max-w-3xl">
+          Algunos cursos y certificaciones que respaldan mi formación en
+          desarrollo de software y tecnologías relacionadas.
+        </p>
+      </div>
+
+      <div class="achievement-grid">
+        {/* Ejemplo 1 */}
+        <article class="achievement-card">
+          <div class="achievement-tools">
+            <div class="achievement-circle">
+              <span class="achievement-box achievement-red"></span>
+            </div>
+            <div class="achievement-circle">
+              <span class="achievement-box achievement-yellow"></span>
+            </div>
+            <div class="achievement-circle">
+              <span class="achievement-box achievement-green"></span>
+            </div>
+          </div>
+          <div class="achievement-content">
+            <h3 class="achievement-title">
+              Introducción a la IA moderna
+            </h3>
+            <p class="achievement-text">
+              Fundamentos de inteligencia artificial y casos de uso prácticos
+              aplicados a proyectos reales.
+            </p>
+            <figure class="achievement-image-wrap">
+              <img
+                src="/images/certificado/5.png"
+                alt="Certificado de Introducción a la IA moderna"
+                loading="lazy"
+              />
+            </figure>
+          </div>
+        </article>
+
+        {/* Ejemplo 2 */}
+        <article class="achievement-card">
+          <div class="achievement-tools">
+            <div class="achievement-circle">
+              <span class="achievement-box achievement-red"></span>
+            </div>
+            <div class="achievement-circle">
+              <span class="achievement-box achievement-yellow"></span>
+            </div>
+            <div class="achievement-circle">
+              <span class="achievement-box achievement-green"></span>
+            </div>
+          </div>
+          <div class="achievement-content">
+            <h3 class="achievement-title">Fundamentos de JavaScript</h3>
+            <p class="achievement-text">
+              Curso orientado a buenas prácticas, asincronía y organización
+              del código para front-end.
+            </p>
+            <figure class="achievement-image-wrap">
+              <img
+                src="/images/certificado/6.png"
+                alt="Certificado de Fundamentos de JavaScript"
+                loading="lazy"
+              />
+            </figure>
+          </div>
+        </article>
+
+        {/* Ejemplo 3 */}
+        <article class="achievement-card">
+          <div class="achievement-tools">
+            <div class="achievement-circle">
+              <span class="achievement-box achievement-red"></span>
+            </div>
+            <div class="achievement-circle">
+              <span class="achievement-box achievement-yellow"></span>
+            </div>
+            <div class="achievement-circle">
+              <span class="achievement-box achievement-green"></span>
+            </div>
+          </div>
+          <div class="achievement-content">
+            <h3 class="achievement-title">Bases y conceptos clave de la IA</h3>
+            <p class="achievement-text">
+              Curso orientado a el aprendizaje de los conocimientos basicos de que
+              es la IA, funciones, tipos y su historia.
+            </p>
+            <figure class="achievement-image-wrap">
+              <img
+                src="/images/certificado/1.png"
+                alt="Certificado de Fundamentos de JavaScript"
+                loading="lazy"
+              />
+            </figure>
+          </div>
+        </article>
+
+        {/* Ejemplo 4 */}
+        <article class="achievement-card">
+          <div class="achievement-tools">
+            <div class="achievement-circle">
+              <span class="achievement-box achievement-red"></span>
+            </div>
+            <div class="achievement-circle">
+              <span class="achievement-box achievement-yellow"></span>
+            </div>
+            <div class="achievement-circle">
+              <span class="achievement-box achievement-green"></span>
+            </div>
+          </div>
+          <div class="achievement-content">
+            <h3 class="achievement-title">Etica: Uso Responsable de Datos</h3>
+            <p class="achievement-text">
+              Curso orientado a la ética en el uso de datos y la IA, incluyendo
+              privacidad, sesgos y consideraciones sociales.
+            </p>
+            <figure class="achievement-image-wrap">
+              <img
+                src="/images/certificado/2.png"
+                alt="Certificado de Fundamentos de JavaScript"
+                loading="lazy"
+              />
+            </figure>
+          </div>
+        </article>
+        {/* Ejemplo 5 */}
+        <article class="achievement-card">
+          <div class="achievement-tools">
+            <div class="achievement-circle">
+              <span class="achievement-box achievement-red"></span>
+            </div>
+            <div class="achievement-circle">
+              <span class="achievement-box achievement-yellow"></span>
+            </div>
+            <div class="achievement-circle">
+              <span class="achievement-box achievement-green"></span>
+            </div>
+          </div>
+          <div class="achievement-content">
+            <h3 class="achievement-title">Fundamentos de Analisis de Datos</h3>
+            <p class="achievement-text">
+              Curso orientado a buenas prácticas, asincronía y organización
+              del modelado, uso y control correcto de datos proporcionados
+              a un modelo de IA para su entrenamiento o uso.
+            </p>
+            <figure class="achievement-image-wrap">
+              <img
+                src="/images/certificado/3.png"
+                alt="Certificado de Fundamentos de JavaScript"
+                loading="lazy"
+              />
+            </figure>
+          </div>
+        </article>
+        {/* Ejemplo 2 */}
+        <article class="achievement-card">
+          <div class="achievement-tools">
+            <div class="achievement-circle">
+              <span class="achievement-box achievement-red"></span>
+            </div>
+            <div class="achievement-circle">
+              <span class="achievement-box achievement-yellow"></span>
+            </div>
+            <div class="achievement-circle">
+              <span class="achievement-box achievement-green"></span>
+            </div>
+          </div>
+          <div class="achievement-content">
+            <h3 class="achievement-title">Principios de data science</h3>
+            <p class="achievement-text">
+              Curso orientado a el conocimiento del dominio (Comprender y resolver problemas),
+              Estadisticas y Matematicas (Metodos para modelar, analizar datos), 
+              Informatica y programacion (Uso de lenguajes Phyton)
+            </p>
+            <figure class="achievement-image-wrap">
+              <img
+                src="/images/certificado/4.png"
+                alt="Certificado de Fundamentos de JavaScript"
+                loading="lazy"
+              />
+            </figure>
+          </div>
+        </article>
+      </div>
+    </section>
+  <Footer />
+</BaseLayout>
+
+<style>
+/* ---------- TITULOS GENERALES ---------- */
+.home-section-title {
+  position: relative;
+  margin-bottom: 0.75rem;
+  font-family: 'Sora', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI',
+    sans-serif;
+  font-size: 1.6rem;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+}
+
+.home-section-title::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  bottom: -0.45rem;
+  width: 4rem;
+  height: 2px;
+  border-radius: 999px;
+  background: linear-gradient(to right, #38bdf8, #a855f7, #22c55e);
+}
+
+.home-section-subtitle {
+  font-size: 0.9rem;
+  color: rgb(148 163 184);
+}
+
+/* ---------- HERO ---------- */
+
+.home-hero {
+  position: relative;
+}
+
+.home-name-card {
+  --background: linear-gradient(120deg, #f97316 0%, #a855f7 50%, #22c55e 100%);
+  width: min(100%, 420px);
+  padding: 4px;
+  border-radius: 1.1rem;
+  background: var(--background);
+  position: relative;
+  overflow: visible;
+}
+
+.home-name-card::after {
+  content: '';
+  position: absolute;
+  top: 26px;
+  left: 0;
+  right: 0;
+  z-index: -1;
+  height: 100%;
+  width: 100%;
+  transform: scale(0.86);
+  filter: blur(26px);
+  background: var(--background);
+  opacity: 0.85;
+  transition: opacity 0.5s;
+}
+
+.home-name-card-inner {
+  background: #020617;
+  color: #e5e7eb;
+  border-radius: 0.95rem;
+  padding: 1.05rem 1.25rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.home-name-title {
+  font-size: 1.15rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.home-name-subtitle {
+  font-size: 0.78rem;
+  text-transform: uppercase;
+  letter-spacing: 0.18em;
+  color: rgb(148 163 184);
+}
+
+.home-name-card:hover::after {
+  opacity: 0;
+}
+
+.home-name-card:hover .home-name-card-inner {
+  color: #fef9c3;
+  transition: color 1s;
+}
+.home-hero-photo {
+  position: relative;
+  width: min(60vw, 260px);
+  aspect-ratio: 1 / 1;        
+  border-radius: 999px;      
+  padding: 4px;
+  background: linear-gradient(
+    135deg,
+    #38bdf8,
+    #a855f7,
+    #22c55e
+  );                          
+  overflow: hidden;
+  box-shadow: 0 22px 60px rgba(15, 23, 42, 0.85);
+  border: 2px solid rgba(15, 23, 42, 0.8);
+  z-index: 1;                
+}
+
+.home-hero-photo img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: inherit;    
+}
+
+@media (max-width: 768px) {
+  .home-hero .grid {
+    gap: 2.5rem;
+  }
+
+  .home-hero-photo {
+    width: 55vw;          
+    max-width: 220px;
+  }
+
+  .home-hero-badge {
+    left: 50%;            
+    bottom: -22px;
+    transform: translateX(-50%);
+    text-align: center;
+  }
+}
+
+@media (max-width: 640px) {
+  .home-exp-timeline {
+    padding-left: 1.9rem;
+  }
+
+  .home-exp-line {
+    left: 0.7rem;
+  }
+
+  .home-exp-dot {
+    left: -0.1rem;
+  }
+
+  .home-exp-card {
+    padding: 0.85rem 0.95rem 0.95rem;
+  }
+} 
+
+@media (max-width: 480px) {
+  .home-hero-photo {
+    width: 65vw;
+    max-width: 210px;
+  }
+
+  .home-name-title {
+    font-size: 1rem;
+  }
+
+  .home-name-subtitle {
+    font-size: 0.7rem;
+    letter-spacing: 0.14em;
+  }
+}
+
+.home-hero-badge {
+  position: absolute;
+  left: 60px;              
+  bottom: -10px;             
+  padding: 0.65rem 0.95rem;
+  border-radius: 999px;
+  background: radial-gradient(circle at top left, #38bdf8, #0f172a);
+  box-shadow: 0 16px 40px rgba(15, 23, 42, 0.9);
+  color: #e5e7eb;
+  max-width: 230px;
+  z-index: 2;               
+}
+
+.home-hero-badge-title {
+  font-size: 0.6rem;
+  text-transform: uppercase;
+  opacity: 0.8;
+  letter-spacing: 0.16em;
+}
+
+.home-hero-badge-body {
+  font-size: 0.78rem;
+  font-weight: 600;
+}
+
+/* ---------- PERFIL PROFESIONAL ---------- */
+
+.home-profile-card {
+  position: relative;
+  margin-top: 1.75rem;
+  border-radius: 1.25rem;
+  min-height: 210px;
+  display: flex;
+  align-items: stretch;
+  justify-content: center;
+}
+
+.home-profile-glass {
+  position: relative;
+  z-index: 2;
+  width: 100%;
+  padding: 1.6rem 1.4rem;
+  background: rgba(15, 23, 42, 0.93);
+  border-radius: 1.1rem;
+  border: 1px solid rgba(148, 163, 184, 0.4);
+  backdrop-filter: blur(24px);
+  box-shadow: 0 18px 45px rgba(15, 23, 42, 0.85);
+}
+
+.home-profile-text {
+  font-size: 0.9rem;
+  color: rgb(203 213 225);
+  margin-bottom: 1rem;
+}
+
+.home-profile-grid {
+  display: grid;
+  gap: 1.25rem;
+}
+
+.home-profile-grid h3 {
+  font-size: 0.85rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.16em;
+  color: rgb(148 163 184);
+  margin-bottom: 0.4rem;
+}
+
+.home-profile-grid ul {
+  font-size: 0.85rem;
+  color: rgb(226 232 240);
+  list-style: disc;
+  padding-left: 1.1rem;
+}
+
+@media (min-width: 768px) {
+  .home-profile-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+.home-profile-blob {
+  position: absolute;
+  z-index: 1;
+  top: 40%;
+  left: 60%;
+  width: 180px;
+  height: 180px;
+  border-radius: 999px;
+  background: radial-gradient(circle, rgba(59, 130, 246, 0.9), #22c55e);
+  opacity: 0.8;
+  filter: blur(22px);
+  animation: home-profile-blob-bounce 7s infinite ease-in-out;
+}
+
+@keyframes home-profile-blob-bounce {
+  0% {
+    transform: translate(-70%, -70%);
+  }
+  25% {
+    transform: translate(-20%, -90%);
+  }
+  50% {
+    transform: translate(10%, -40%);
+  }
+  75% {
+    transform: translate(-40%, -20%);
+  }
+  100% {
+    transform: translate(-70%, -70%);
+  }
+}
+
+/* ---------- EXPERIENCIA ---------- */
+
+.home-exp-timeline {
+  position: relative;
+  margin-top: 1.75rem;
+  padding-left: 2.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.6rem;
+}
+
+.home-exp-line {
+  position: absolute;
+  top: 0.1rem;
+  bottom: 0.2rem;
+  left: 0.9rem;
+  width: 2px;
+  background: linear-gradient(to bottom, #38bdf8, #a855f7, #22c55e);
+  opacity: 0.8;
+}
+
+.home-exp-item {
+  position: relative;
+  display: flex;
+  gap: 0.75rem;
+}
+
+.home-exp-dot {
+  position: absolute;
+  left: -1.1rem;
+  top: 0.7rem;
+  width: 0.85rem;
+  height: 0.85rem;
+  border-radius: 999px;
+  background: #1e293b;
+  border: 2px solid #38bdf8;
+  box-shadow: 0 0 0 4px rgba(56, 189, 248, 0.2);
+}
+
+.home-exp-dot--current {
+  background: #22c55e;
+  border-color: #22c55e;
+}
+
+.home-exp-card {
+  width: 100%;
+  background-color: #f2f3f7;
+  border-radius: 0.9rem;
+  cursor: default;
+  transition: background-color 0.25s ease, box-shadow 0.25s ease,
+    border-color 0.25s ease;
+  box-shadow: 0.9em 0.9em 1.3em #d1d5e3b1, -0.75em -0.75em 1.1em #ffffff;
+  border: 1.5px solid #f2f3f7;
+  padding: 1rem 1.4rem 1.1rem;
+}
+
+.home-exp-card:hover {
+  background-color: #d3ddf1;
+  border-color: #38bdf8;
+}
+
+.home-exp-header {
+  display: flex;
+  flex-direction: column;
+  gap: 0.15rem;
+  margin-bottom: 0.45rem;
+}
+
+.home-exp-role {
+  font-weight: 600;
+  font-size: 0.95rem;
+  color: #020617;
+}
+
+.home-exp-time {
+  font-size: 0.8rem;
+  color: #64748b;
+}
+
+.home-exp-text {
+  font-size: 0.88rem;
+  color: #0f172a;
+  margin-bottom: 0.6rem;
+}
+
+.home-exp-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.35rem;
+}
+
+.home-exp-tags span {
+  font-size: 0.7rem;
+  padding: 0.18rem 0.5rem;
+  border-radius: 999px;
+  background: rgba(15, 23, 42, 0.05);
+  border: 1px solid rgba(148, 163, 184, 0.6);
+  color: #020617;         
+}
+
+
+/* ---------- HABILIDADES (CARDS QUE SE VOLTEAN) ---------- */
+
+.home-skills-grid {
+  display: grid;
+  gap: 1.3rem;
+  margin-top: 1.4rem;
+}
+
+@media (min-width: 640px) {
+  .home-skills-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (min-width: 1024px) {
+  .home-skills-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+
+.home-skill-card {
+  position: relative;
+  width: 100%;
+  height: 230px;
+  border-radius: 20px;
+  background-image: linear-gradient(180deg, #0ea5e9, #a855f7);
+  padding: 3px;
+  overflow: visible;
+}
+
+.home-skill-inner {
+  position: relative;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  border-radius: 18px;
+  background: #020617;
+  transform-style: preserve-3d;
+  transition: transform 0.9s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.home-skill-card:hover .home-skill-inner {
+  transform: rotateY(180deg);
+}
+
+.home-skill-face {
+  position: absolute;
+  inset: 0;
+  padding: 1rem;
+  border-radius: 18px;
+  backface-visibility: hidden;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.home-skill-front {
+  color: white;
+  text-align: center;
+}
+
+.home-skill-back {
+  transform: rotateY(180deg);
+  background: radial-gradient(circle at top left, #0f172a, #020617);
+  color: rgb(209 213 219);
+  font-size: 0.8rem;
+  align-items: flex-start;
+  justify-content: flex-start;
+  padding: 1rem 1.1rem;
+}
+
+.home-skill-back p {
+  margin-bottom: 0.5rem;
+}
+
+.home-skill-back ul {
+  list-style: disc;
+  padding-left: 1rem;
+}
+
+.home-skill-icon {
+  font-size: 2rem;
+  margin-bottom: 0.6rem;
+}
+
+.home-skill-title {
+  font-size: 1.05rem;
+  font-weight: 600;
+}
+
+.home-skill-level {
+  font-size: 0.8rem;
+  margin-top: 0.2rem;
+  color: rgb(148 163 184);
+}
+
+/* Pequeño ajuste para móviles */
+@media (max-width: 640px) {
+  .home-skill-card {
+    height: 210px;
+  }
+}
+
+.achievement-grid {
+  display: grid;
+  gap: 1.5rem;
+}
+
+@media (min-width: 640px) {
+  .achievement-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (min-width: 1024px) {
+  .achievement-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+
+
+.achievement-card {
+  width: 100%;
+  max-width: 260px;
+  margin-inline: auto;
+  background-color: #011522;
+  border-radius: 0.8rem;
+  overflow: hidden;
+  box-shadow: 0 18px 40px rgba(15, 23, 42, 0.9);
+  border: 1px solid rgba(15, 23, 42, 0.95);
+}
+
+.achievement-tools {
+  display: flex;
+  align-items: center;
+  padding: 9px;
+}
+
+.achievement-circle {
+  padding: 0 4px;
+}
+
+.achievement-box {
+  display: inline-block;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+}
+
+.achievement-red {
+  background-color: #ff605c;
+}
+
+.achievement-yellow {
+  background-color: #ffbd44;
+}
+
+.achievement-green {
+  background-color: #00ca4e;
+}
+
+.achievement-content {
+  padding: 0.6rem 0.75rem 0.9rem;
+  color: #e5e7eb;
+  font-size: 0.82rem;
+}
+
+.achievement-title {
+  margin: 0 0 0.25rem;
+  font-size: 0.9rem;
+  font-weight: 600;
+}
+
+.achievement-text {
+  margin: 0 0 0.7rem;
+  font-size: 0.8rem;
+  line-height: 1.6;
+  color: #cbd5f5;
+}
+
+.achievement-image-wrap {
+  position: relative;
+  border-radius: 0.6rem;
+  padding: 3px;
+  background: linear-gradient(120deg, #22c55e, #22d3ee, #a855f7);
+  overflow: hidden;
+  box-shadow: 0 10px 30px rgba(15, 23, 42, 0.9);
+}
+
+.achievement-image-wrap img {
+  display: block;
+  width: 100%;
+  border-radius: 0.5rem;
+  object-fit: cover;
+}
+
+:global(body:not(.dark)) .achievement-card {
+  background-color: #f9fafb;
+  border-color: rgba(148, 163, 184, 0.35);
+  box-shadow: 0 18px 40px rgba(15, 23, 42, 0.14);
+}
+
+:global(body:not(.dark)) .achievement-content {
+  color: #1f2933;
+}
+
+:global(body:not(.dark)) .achievement-text {
+  color: #4b5563;
+}
+
+:global(body.dark) .home-exp-card {
+  background-color: #020617;
+  border-color: rgba(51, 65, 85, 0.9);
+  box-shadow: 0 18px 40px rgba(15, 23, 42, 0.9);
+}
+
+:global(body.dark) .home-exp-role {
+  color: #e5e7eb;
+}
+
+:global(body.dark) .home-exp-time {
+  color: #94a3b8;
+}
+
+:global(body.dark) .home-exp-text {
+  color: #cbd5f5;
+}
+
+:global(body.dark) .home-exp-tags span {
+  background: rgba(15, 23, 42, 0.85);
+  border-color: rgba(148, 163, 184, 0.85);
+  color: #e5e7eb;         
+}
+</style>

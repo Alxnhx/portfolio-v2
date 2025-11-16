@@ -1,0 +1,660 @@
+---
+title: "Gestor de Valuaciones y Admisión de Vehículos"
+date: "2025-04-20"
+summary: "Registra valuaciones, daños y piezas a reemplazar, emite órdenes de admisión y reportes para aseguradoras y clientes particulares."
+cover: "/images/proyectos/valuacion/1.png"
+stack:
+  - "Java"
+  - "JavaFX"
+  - "Maven"
+  - "Oracle SQL"
+  - "JPA/Hibernate"
+  - "PDF"
+role: "Desarrollador Full Stack"
+repo: "https://github.com/Alxnhx"
+demo: ""
+---
+## Contexto
+
+<div className="context-grid">
+  {/* Columna izquierda: texto + terminal */}
+  <div className="context-main">
+    El proceso de valuación y admisión iniciaba con formularios en papel y formatos distintos según la aseguradora. Cada vehículo generaba varios documentos y no siempre quedaba claro qué daños, qué piezas y qué refacciones se habían comprometido a cambiar.
+
+    El objetivo: un sistema donde el valuador capture en un solo flujo los datos del vehículo, sus daños, las piezas a reemplazar y el tipo de cliente (aseguradora o particular), generando automáticamente la orden de admisión y los reportes de refacciones necesarios.
+    <div className="terminal-loader">
+      <div className="terminal-header">
+        <div className="terminal-controls">
+          <div className="terminal-control close"></div>
+          <div className="terminal-control minimize"></div>
+          <div className="terminal-control maximize"></div>
+        </div>
+        <div className="terminal-title">Status · GEMA Valuacion</div>
+      </div>
+      <div className="terminal-content">
+        <div className="terminal-text">Preparando flujo de valuación de vehículo...</div>
+      </div>
+    </div>
+  </div>
+
+  {/* Columna derecha: snapshot del proyecto */}
+  <aside className="context-snapshot relative rounded-2xl border border-slate-800 bg-slate-950 p-4 text-slate-50 shadow-xl">
+    <div className="pointer-events-none absolute inset-0 rounded-2xl bg-gradient-to-r from-indigo-500/40 via-purple-500/30 to-pink-500/30 opacity-40 blur-md"></div>
+    <div className="relative space-y-4">
+      <header className="flex items-center justify-between gap-2">
+        <div className="flex items-center gap-2">
+          <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-gradient-to-br from-indigo-500 to-purple-500">
+            <span className="text-xs font-bold">GA</span>
+          </div>
+          <div>
+            <p className="text-xs font-semibold">Snapshot del proyecto</p>
+            <p className="text-[10px] text-slate-400">
+              Taller automotriz • Valuaciones y admisión
+            </p>
+          </div>
+        </div>
+        <span className="flex items-center gap-1 rounded-full bg-emerald-500/10 px-2 py-1 text-[10px] font-medium text-emerald-400">
+          <span className="h-1.5 w-1.5 rounded-full bg-emerald-400"></span>
+          En uso en valuaciones
+        </span>
+      </header>
+
+      <div className="grid grid-cols-2 gap-3 text-xs">
+        <div className="rounded-lg bg-slate-900/70 p-3">
+          <p className="font-medium text-slate-300">Tiempo de registro</p>
+          <p className="mt-1 text-lg font-semibold text-emerald-400">Tiempo de admisión → Formulario único</p>
+          <p className="mt-1 text-[10px] text-slate-400">
+            Un solo flujo para aseguradoras y particulares.
+          </p>
+        </div>
+        <div className="rounded-lg bg-slate-900/70 p-3">
+          <p className="font-medium text-slate-300">Stack clave</p>
+          <p className="mt-1 text-[11px] leading-snug text-slate-100">
+            Stack clave → JavaFX + PDF
+          </p>
+          <p className="mt-1 text-[10px] text-slate-400">
+           Generación de órdenes y reportes descargables.
+          </p>
+        </div>
+      </div>
+
+      <div className="space-y-2">
+        <p className="text-[11px] font-semibold text-slate-300">
+          Tipos de mejoras
+        </p>
+        <ul className="space-y-1 text-[11px] text-slate-300">
+          <li>• Ordenes de admisión estandarizadas.</li>
+          <li>• Reportes de daños y refacciones por vehículo.</li>
+          <li>• Búsqueda rápida por placa, folio o aseguradora.</li>
+        </ul>
+      </div>
+    </div>
+  </aside>
+</div>
+
+## Vistas del panel
+
+<div className="project-carousel">
+  <div className="project-carousel-body">
+    <div className="project-carousel-slide is-active">
+      <img
+        src="/images/proyectos/valuacion/1.png"
+        alt=""
+      />
+    </div>
+    <div className="project-carousel-slide">
+      <img
+        src="/images/proyectos/valuacion/2.png"
+        alt="Almacen"
+      />
+    </div>
+    <div className="project-carousel-slide">
+      <img
+        src="/images/proyectos/valuacion/3.png"
+        alt="Reportes y exportes de evaluaciones"
+      />
+    </div>
+    <div className="project-carousel-slide">
+      <img
+        src="/images/proyectos/valuacion/4.png"
+        alt="Reportes y exportes de evaluaciones"
+      />
+    </div>
+    <div className="project-carousel-slide">
+      <img
+        src="/images/proyectos/valuacion/5.png"
+        alt="Seccion de empleados y usuarios"
+      />
+    </div>
+    <div className="project-carousel-slide">
+      <img
+        src="/images/proyectos/valuacion/6.png"
+        alt="Seccion de empleados y usuarios"
+      />
+    </div>
+    <div className="project-carousel-slide">
+      <img
+        src="/images/proyectos/valuacion/7.png"
+        alt="Correos"
+      />
+    </div>
+    <div className="project-carousel-slide">
+      <img
+        src="/images/proyectos/valuacion/8.png"
+        alt="Correos"
+      />
+    </div>
+    <div className="project-carousel-slide">
+      <img
+        src="/images/proyectos/valuacion/9.png"
+        alt="Correos"
+      />
+    </div>
+    <div className="project-carousel-slide">
+      <img
+        src="/images/proyectos/valuacion/10.png"
+        alt="Correos"
+      />
+    </div>
+    <div className="project-carousel-slide">
+      <img
+        src="/images/proyectos/valuacion/11.png"
+        alt=""
+      />
+    </div>
+    <div className="project-carousel-slide">
+      <img
+        src="/images/proyectos/valuacion/12.png"
+        alt="Almacen"
+      />
+    </div>
+    <div className="project-carousel-slide">
+      <img
+        src="/images/proyectos/valuacion/13.png"
+        alt="Reportes y exportes de evaluaciones"
+      />
+    </div>
+    <div className="project-carousel-slide">
+      <img
+        src="/images/proyectos/valuacion/14.png"
+        alt="Reportes y exportes de evaluaciones"
+      />
+    </div>
+    <div className="project-carousel-slide">
+      <img
+        src="/images/proyectos/valuacion/15.png"
+        alt="Seccion de empleados y usuarios"
+      />
+    </div>
+    <div className="project-carousel-slide">
+      <img
+        src="/images/proyectos/valuacion/16.png"
+        alt="Seccion de empleados y usuarios"
+      />
+    </div>
+    <div className="project-carousel-slide">
+      <img
+        src="/images/proyectos/valuacion/17.png"
+        alt="Correos"
+      />
+    </div>
+    <div className="project-carousel-slide">
+      <img
+        src="/images/proyectos/valuacion/18.png"
+        alt="Correos"
+      />
+    </div>
+    <div className="project-carousel-slide">
+      <img
+        src="/images/proyectos/valuacion/19.png"
+        alt="Correos"
+      />
+    </div>
+    <div className="project-carousel-slide">
+      <img
+        src="/images/proyectos/valuacion/20.png"
+        alt="Correos"
+      />
+    </div>
+  </div>
+
+  <button className="project-carousel-btn prev" type="button">&lt;</button>
+  <button className="project-carousel-btn next" type="button">&gt;</button>
+
+  <div className="project-carousel-pagination">
+    <img
+      src="/images/proyectos/valuacion/1.png"
+      className="project-carousel-thumb is-active"
+      alt="Vista 1"
+    />
+    <img
+      src="/images/proyectos/valuacion/2.png"
+      className="project-carousel-thumb"
+      alt="Vista 2"
+    />
+    <img
+      src="/images/proyectos/valuacion/3.png"
+      className="project-carousel-thumb"
+      alt="Vista 3"
+    />
+    <img
+      src="/images/proyectos/valuacion/4.png"
+      className="project-carousel-thumb"
+      alt="Vista 4"
+    />
+    <img
+      src="/images/proyectos/valuacion/5.png"
+      className="project-carousel-thumb"
+      alt="Vista 5"
+    />
+    <img
+      src="/images/proyectos/valuacion/6.png"
+      className="project-carousel-thumb"
+      alt="Vista 6"
+    />
+    <img
+      src="/images/proyectos/valuacion/7.png"
+      className="project-carousel-thumb"
+      alt="Vista 7"
+    />
+    <img
+      src="/images/proyectos/valuacion/8.png"
+      className="project-carousel-thumb"
+      alt="Vista 8"
+    />
+    <img
+      src="/images/proyectos/valuacion/9.png"
+      className="project-carousel-thumb"
+      alt="Vista 9"
+    />
+    <img
+      src="/images/proyectos/valuacion/10.png"
+      className="project-carousel-thumb"
+      alt="Vista 10"
+    />
+    <img
+      src="/images/proyectos/valuacion/11.png"
+      className="project-carousel-thumb"
+      alt="Vista 11"
+    />
+    <img
+      src="/images/proyectos/valuacion/12.png"
+      className="project-carousel-thumb"
+      alt="Vista 12"
+    />
+    <img
+      src="/images/proyectos/valuacion/13.png"
+      className="project-carousel-thumb"
+      alt="Vista 13"
+    />
+    <img
+      src="/images/proyectos/valuacion/14.png"
+      className="project-carousel-thumb"
+      alt="Vista 14"
+    />
+    <img
+      src="/images/proyectos/valuacion/15.png"
+      className="project-carousel-thumb"
+      alt="Vista 15"
+    />
+    <img
+      src="/images/proyectos/valuacion/16.png"
+      className="project-carousel-thumb"
+      alt="Vista 16"
+    />
+    <img
+      src="/images/proyectos/valuacion/17.png"
+      className="project-carousel-thumb"
+      alt="Vista 17"
+    />
+    <img
+      src="/images/proyectos/valuacion/18.png"
+      className="project-carousel-thumb"
+      alt="Vista 18"
+    />
+    <img
+      src="/images/proyectos/valuacion/19.png"
+      className="project-carousel-thumb"
+      alt="Vista 19"
+    />
+    <img
+      src="/images/proyectos/valuacion/20.png"
+      className="project-carousel-thumb"
+      alt="Vista 20"
+    />
+  </div>
+</div>
+
+<script type="module">{`
+  const initCarousel = () => {
+    const carousel = document.querySelector('.project-carousel');
+    if (!carousel) return;
+
+    const slides = carousel.querySelectorAll('.project-carousel-slide');
+    const thumbs = carousel.querySelectorAll('.project-carousel-thumb');
+    const prevBtn = carousel.querySelector('.prev');
+    const nextBtn = carousel.querySelector('.next');
+    
+    let currentIndex = 0;
+
+    const showSlide = (index) => {
+      currentIndex = ((index % slides.length) + slides.length) % slides.length;
+      
+      slides.forEach((slide, i) => {
+        slide.classList.toggle('is-active', i === currentIndex);
+      });
+      
+      thumbs.forEach((thumb, i) => {
+        thumb.classList.toggle('is-active', i === currentIndex);
+      });
+    };
+
+    prevBtn?.addEventListener('click', () => showSlide(currentIndex - 1));
+    nextBtn?.addEventListener('click', () => showSlide(currentIndex + 1));
+
+    thumbs.forEach((thumb, index) => {
+      thumb.addEventListener('click', () => showSlide(index));
+    });
+  };
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initCarousel);
+  } else {
+    initCarousel();
+  }
+`}</script>
+
+## Archivos generados por el software
+
+<div class="sample-card-grid">
+  <div class="sample-card">
+    <span class="sample-card__title">Valuacion</span>
+    <p class="sample-card__content">
+      PDF producto de la generacion de la valuacion con las refacciones solicitadas asociada a una unidad 
+      ,el cual muestra la estructura del reporte de sus refacciones el mismo que se envia 
+      atravez del sistema por correo electronico (archivo muestra).
+    </p>
+
+    <div class="sample-card__actions">
+      <a
+        href="/muestras/reportrefac.pdf"
+        download
+        class="sample-card__button"
+      >
+        Descargar PDF
+      </a>
+    </div>
+  </div>
+
+  <div class="sample-card">
+    <span class="sample-card__title">Volante de admision</span>
+    <p class="sample-card__content">
+      PDF generado por el sistema con los datos del cliente y su vehiculo, al ingresarlo al taller
+      de manera particular o por aseguradora (archivo muestra).
+    </p>
+
+    <div class="sample-card__actions">
+      <a
+        href="/muestras/ordadmision.pdf"
+        download
+        class="sample-card__button"
+      >
+        Descargar PDF 
+      </a>
+    </div>  
+  </div>
+</div>
+---
+
+## Arquitectura y diseño técnico
+
+<div className="not-prose w-full grid gap-6 md:grid-cols-3 mt-4 arquitectura-grid">
+  <div className="case-card">
+    <div className="case-card-border"></div>
+    <div className="card_title__container">
+      <span className="case-card-title">Arquitectura</span>
+      <p className="case-card-sub">Diseño general del backend.</p>
+    </div>
+    <hr className="case-card-line" />
+    <ul className="case-card-list">
+      <li className="case-card-list-item">
+        <span className="case-card-check">
+          <svg viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
+            <path d="M12.416 3.376a.75.75 0 0 1 .208 1.04l-5 7.5a.75.75 0 0 1-1.154.114l-3-3a.75.75 0 0 1 1.06-1.06l2.353 2.353 4.493-6.74a.75.75 0 0 1 1.04-.207Z"></path>
+          </svg>
+        </span>
+        <span>Aplicación de escritorio en <strong>JavaFX.</strong></span>
+      </li>
+      <li className="case-card-list-item">
+        <span className="case-card-check">
+          <svg viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
+            <path d="M12.416 3.376a.75.75 0 0 1 .208 1.04l-5 7.5a.75.75 0 0 1-1.154.114l-3-3a.75.75 0 0 1 1.06-1.06l2.353 2.353 4.493-6.74a.75.75 0 0 1 1.04-.207Z"></path>
+          </svg>
+        </span>
+        <span>Persistencia con Oracle SQL + JPA/Hibernate.</span>
+      </li>
+      <li className="case-card-list-item">
+        <span className="case-card-check">
+          <svg viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
+            <path d="M12.416 3.376a.75.75 0 0 1 .208 1.04l-5 7.5a.75.75 0 0 1-1.154.114l-3-3a.75.75 0 0 1 1.06-1.06l2.353 2.353 4.493-6.74a.75.75 0 0 1 1.04-.207Z"></path>
+          </svg>
+        </span>
+        <span>Módulo de generación de PDFs para órdenes y reportes.</span>
+      </li>
+    </ul>
+  </div>
+
+  <div className="case-card">
+    <div className="case-card-border"></div>
+    <div className="card_title__container">
+      <span className="case-card-title">Módulos principales</span>
+      <p className="case-card-sub">Qué resuelve el sistema.</p>
+    </div>
+    <hr className="case-card-line" />
+    <ul className="case-card-list">
+      <li className="case-card-list-item">
+        <span className="case-card-check">
+          <svg viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
+            <path d="M12.416 3.376a.75.75 0 0 1 .208 1.04l-5 7.5a.75.75 0 0 1-1.154.114l-3-3a.75.75 0 0 1 1.06-1.06l2.353 2.353 4.493-6.74a.75.75 0 0 1 1.04-.207Z"></path>
+          </svg>
+        </span>
+        <span>Registro de valuaciones (datos del cliente, vehículo y daños).</span>
+      </li>
+      <li className="case-card-list-item">
+        <span className="case-card-check">
+          <svg viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
+            <path d="M12.416 3.376a.75.75 0 0 1 .208 1.04l-5 7.5a.75.75 0 0 1-1.154.114l-3-3a.75.75 0 0 1 1.06-1.06l2.353 2.353 4.493-6.74a.75.75 0 0 1 1.04-.207Z"></path>
+          </svg>
+        </span>
+        <span>Captura de piezas a reemplazar y mano de obra.</span>
+      </li>
+      <li className="case-card-list-item">
+        <span className="case-card-check">
+          <svg viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
+            <path d="M12.416 3.376a.75.75 0 0 1 .208 1.04l-5 7.5a.75.75 0 0 1-1.154.114l-3-3a.75.75 0 0 1 1.06-1.06l2.353 2.353 4.493-6.74a.75.75 0 0 1 1.04-.207Z"></path>
+          </svg>
+        </span>
+        <span>Generación de órdenes de admisión en PDF.</span>
+      </li>
+      <li className="case-card-list-item">
+        <span className="case-card-check">
+          <svg viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
+            <path d="M12.416 3.376a.75.75 0 0 1 .208 1.04l-5 7.5a.75.75 0 0 1-1.154.114l-3-3a.75.75 0 0 1 1.06-1.06l2.353 2.353 4.493-6.74a.75.75 0 0 1 1.04-.207Z"></path>
+          </svg>
+        </span>
+        <span>Vista general de valuaciones con filtros por aseguradora, estado, fechas.</span>
+      </li>
+    </ul>
+  </div>
+
+  <div className="case-card">
+    <div className="case-card-border"></div>
+    <div className="card_title__container">
+      <span className="case-card-title">Integraciones</span>
+      <p className="case-card-sub">Cómo se conecta con otros sistemas.</p>
+    </div>
+    <hr className="case-card-line" />
+    <ul className="case-card-list">
+      <li className="case-card-list-item">
+        <span className="case-card-check">
+          <svg viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
+            <path d="M12.416 3.376a.75.75 0 0 1 .208 1.04l-5 7.5a.75.75 0 0 1-1.154.114l-3-3a.75.75 0 0 1 1.06-1.06l2.353 2.353 4.493-6.74a.75.75 0 0 1 1.04-.207Z"></path>
+          </svg>
+        </span>
+        <span>Enlace con módulo de refacciones (para reporte de piezas).</span>
+      </li>
+      <li className="case-card-list-item">
+        <span className="case-card-check">
+          <svg viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
+            <path d="M12.416 3.376a.75.75 0 0 1 .208 1.04l-5 7.5a.75.75 0 0 1-1.154.114l-3-3a.75.75 0 0 1 1.06-1.06l2.353 2.353 4.493-6.74a.75.75 0 0 1 1.04-.207Z"></path>
+          </svg>
+        </span>
+        <span>Enlace con panel administrativo (resumen por tipo de cliente).</span>
+      </li>
+      <li className="case-card-list-item">
+        <span className="case-card-check">
+          <svg viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
+            <path d="M12.416 3.376a.75.75 0 0 1 .208 1.04l-5 7.5a.75.75 0 0 1-1.154.114l-3-3a.75.75 0 0 1 1.06-1.06l2.353 2.353 4.493-6.74a.75.75 0 0 1 1.04-.207Z"></path>
+          </svg>
+        </span>
+        <span>Posibilidad de enviar PDFs por correo (cuando se combine con admin).</span>
+      </li>
+    </ul>
+  </div>
+</div>
+
+### Stack destacado
+
+<div className="stack-cards mt-4">
+  <div className="stack-card red">
+    <p className="tip">Maven & Java & JavaFX & JPA(Hibernate)</p>
+    <p className="second-text">APIs REST, servicios, validaciones.</p>
+  </div>
+  <div className="stack-card blue">
+    <p className="tip">Oracle SQL & Workbench & Modelado</p>
+    <p className="second-text">Tablas, relaciones, performance.</p>
+  </div>
+  <div className="stack-card green">
+    <p className="tip">Productividad</p>
+    <p className="second-text">Mayor gestion, reportes y menos papeleo.</p>
+  </div>
+</div>
+
+---
+
+## Retos
+
+<div className="case-card mt-3 case-card-left">
+  <div className="case-card-border"></div>
+  <div className="card_title__container">
+    <span className="case-card-title">Retos principales</span>
+    <p className="case-card-sub">Errores reales las valuaciones del taller.</p>
+  </div>
+  <hr className="case-card-line" />
+  <ul className="case-card-list">
+    <li className="case-card-list-item">
+      <span className="case-card-check">
+        <svg viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
+          <path d="M12.416 3.376a.75.75 0 0 1 .208 1.04l-5 7.5a.75.75 0 0 1-1.154.114l-3-3a.75.75 0 0 1 1.06-1.06l2.353 2.353 4.493-6.74a.75.75 0 0 1 1.04-.207Z"></path>
+        </svg>
+      </span>
+      <span>Unificar el flujo para aseguradoras y particulares sin perder detalles específicos.</span>
+    </li>
+    <li className="case-card-list-item">
+      <span className="case-card-check">
+        <svg viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
+          <path d="M12.416 3.376a.75.75 0 0 1 .208 1.04l-5 7.5a.75.75 0 0 1-1.154.114l-3-3a.75.75 0 0 1 1.06-1.06l2.353 2.353 4.493-6.74a.75.75 0 0 1 1.04-.207Z"></path>
+        </svg>
+      </span>
+      <span>Diseñar PDFs claros para uso tanto interno como externo.</span>
+    </li>
+    <li className="case-card-list-item">
+      <span className="case-card-check">
+        <svg viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
+          <path d="M12.416 3.376a.75.75 0 0 1 .208 1.04l-5 7.5a.75.75 0 0 1-1.154.114l-3-3a.75.75 0 0 1 1.06-1.06l2.353 2.353 4.493-6.74a.75.75 0 0 1 1.04-.207Z"></path>
+        </svg>
+      </span>
+      <span>Mantener sincronía entre valuaciones, refacciones y entrega de vehículo.</span>
+    </li>
+  </ul>
+</div>
+
+---
+
+## Solución
+
+<div className="case-card mt-3 case-card-right">
+  <div className="case-card-border"></div>
+  <div className="card_title__container">
+    <span className="case-card-title">Diseño de la solución</span>
+    <p className="case-card-sub">Qué se hizo técnicamente.</p>
+  </div>
+  <hr className="case-card-line" />
+  <ul className="case-card-list">
+    <li className="case-card-list-item">
+      <span className="case-card-check">
+        <svg viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
+          <path d="M12.416 3.376a.75.75 0 0 1 .208 1.04l-5 7.5a.75.75 0 0 1-1.154.114l-3-3a.75.75 0 0 1 1.06-1.06l2.353 2.353 4.493-6.74a.75.75 0 0 1 1.04-.207Z"></path>
+        </svg>
+      </span>
+      <span>Estructura de datos que diferencía aseguradora/particular con flags.</span>
+    </li>
+    <li className="case-card-list-item">
+      <span className="case-card-check">
+        <svg viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
+          <path d="M12.416 3.376a.75.75 0 0 1 .208 1.04l-5 7.5a.75.75 0 0 1-1.154.114l-3-3a.75.75 0 0 1 1.06-1.06l2.353 2.353 4.493-6.74a.75.75 0 0 1 1.04-.207Z"></path>
+        </svg>
+      </span>
+      <span>Plantillas de PDF reutilizables para órdenes y reportes.</span>
+    </li>
+    <li className="case-card-list-item">
+      <span className="case-card-check">
+        <svg viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
+          <path d="M12.416 3.376a.75.75 0 0 1 .208 1.04l-5 7.5a.75.75 0 0 1-1.154.114l-3-3a.75.75 0 0 1 1.06-1.06l2.353 2.353 4.493-6.74a.75.75 0 0 1 1.04-.207Z"></path>
+        </svg>
+      </span>
+      <span>Pantallas que muestran el resumen completo de la valuación (daños + piezas + costos).</span>
+    </li>
+  </ul>
+</div>
+
+---
+
+## Resultado
+
+<div className="case-card mt-3 case-card-left">
+  <div className="case-card-border"></div>
+  <div className="card_title__container">
+    <span className="case-card-title">Impacto en el taller</span>
+    <p className="case-card-sub">Qué cambió después del deploy.</p>
+  </div>
+  <hr className="case-card-line" />
+  <ul className="case-card-list">
+    <li className="case-card-list-item">
+      <span className="case-card-check">
+        <svg viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
+          <path d="M12.416 3.376a.75.75 0 0 1 .208 1.04l-5 7.5a.75.75 0 0 1-1.154.114l-3-3a.75.75 0 0 1 1.06-1.06l2.353 2.353 4.493-6.74a.75.75 0 0 1 1.04-.207Z"></path>
+        </svg>
+      </span>
+      <span>Proceso de valuación más claro y trazable.</span>
+    </li>
+    <li className="case-card-list-item">
+      <span className="case-card-check">
+        <svg viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
+          <path d="M12.416 3.376a.75.75 0 0 1 .208 1.04l-5 7.5a.75.75 0 0 1-1.154.114l-3-3a.75.75 0 0 1 1.06-1.06l2.353 2.353 4.493-6.74a.75.75 0 0 1 1.04-.207Z"></path>
+        </svg>
+      </span>
+      <span>Documentos legibles y consistentes para todas las aseguradoras.</span>
+    </li>
+    <li className="case-card-list-item">
+      <span className="case-card-check">
+        <svg viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
+          <path d="M12.416 3.376a.75.75 0 0 1 .208 1.04l-5 7.5a.75.75 0 0 1-1.154.114l-3-3a.75.75 0 0 1 1.06-1.06l2.353 2.353 4.493-6.74a.75.75 0 0 1 1.04-.207Z"></path>
+        </svg>
+      </span>
+      <span>Mayor control sobre qué se prometió reparar y qué se reparó realmente.</span>
+    </li>
+  </ul>
+
+  <button className="case-card-button">Ver código en GitHub</button>
+</div>
