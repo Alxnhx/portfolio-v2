@@ -4,6 +4,6 @@ import tailwind from '@astrojs/tailwind';
 import mdx from '@astrojs/mdx';
 
 export default defineConfig({
-  // site: 'https://tu-url-en-vercel.app',
+  site: 'https://portfolio-v2-two-swart.vercel.app/',
   integrations: [tailwind(), mdx()],
 });
